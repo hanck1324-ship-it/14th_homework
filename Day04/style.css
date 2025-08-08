@@ -1,0 +1,116 @@
+/* 기본 스타일 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: #f0f2f5;
+    font-family: 'Malgun Gothic', sans-serif;
+}
+
+/* 최상위 컨테이너 */
+.app-container {
+    max-width: 1200px;
+    margin: 50px auto;
+    background-color: #fff;
+    border: 1px solid #eee;
+    padding: 40px;
+}
+
+/* 메인 헤더 */
+.main-header {
+    width: 100%;
+    height: 164px;
+    padding: 32px 10px;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 24px;
+}
+.main-header h1 {
+    color: #FFFFFF;
+    font-family: 'SUIT Variable', sans-serif;
+    font-weight: 800;
+    font-size: 80px;
+    line-height: 100px;
+}
+
+/* 메인 콘텐츠 영역 */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* 배너 이미지 */
+.banner-image {
+    width: 90%;
+    max-width: 1168px;
+    height: 240px;
+    border-radius: 24px;
+    align-self: center; /* 중앙 정렬 */
+    overflow: hidden;
+}
+.banner-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 내비게이션 탭 (임시 스타일) */
+.tab-nav {
+    padding: 0px 40px;
+    border-bottom: 1px solid #f0f0f0;
+}
+.tab-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+.tab-nav li a {
+    text-decoration: none;
+    color: #888;
+    font-weight: bold;
+    font-size: 1.1rem;
+    display: inline-block;
+    padding: 15px 5px; 
+}
+.tab-nav li.active a {
+    color: #000;
+    border-bottom: 3px solid #000;
+}
+
+
+/* 다이어리 목록 + 폼을 감싸는 영역 */
+.diary-area {
+    display: flex;
+    gap: 40px;
+}
+.diary-list-section {
+    flex: 2;
+}
+.diary-form-section {
+    flex: 1;
+}
+
+/* '민지의 다이어리' 제목 영역 */
+.frame-2 {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+}
+.logo {
+    font-family: 'Pretendard Variable', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    margin: 0;
+}
+
+
+/* --- 아래는 아직 스타일 미적용 --- */
+.card-grid { }
+.diary-form-section { }
+.app-footer { }
