@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+
+    <title>일기보관함</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="main-header">
+            <h1>일기보관함_메인</h1>
+        </header>
+
+        <main class="main-content">
+            <div class="banner-image">
+                <img src="./assets/Rectangle1.jpg" alt="메인 배너 이미지">
+            </div>
+            
+            <nav class="tab-nav">
+                <!-- gPt 보고  기입합 -->
+                <ul>
+                    <li class="active"><a href="#">일기보관함</a></li>
+                    <li><a href="#">사진보관함</a></li>
+                </ul>
+            </nav>
+
+            <div class="diary-area">
+                <section class="diary-list-section">
+                    <div class="frame-2">
+                        <h2 class="logo">민지의 다이어리</h2>
+                    </div>
+                    <!-- 감정카드가 많고 반복적이라 추가가 힘듬 -->
+                    <div class="card-grid">
+                        </div>
+                </section>
+<!-- aside 제미나이에서 찾음 구성틀을 예쁘게 맞추고 싶었음 , 그림으로 지루함을 줄임 -->
+                <aside class="diary-form-section">
+                    <h3>✍️ 일기 쓰기</h3>
+                    <form id="diary-form">
+                        <fieldset class="mood-selector">
+                            <legend>오늘 기분은 어때요?</legend>
+                            <label><input type="radio" name="mood" value="🥰 행복해요" checked> 행복해요</label>
+                            <label><input type="radio" name="mood" value="🙂 슬퍼요"> 슬퍼요</label>
+                            <label><input type="radio" name="mood" value="😭 그럭저럭"> 그럭저럭</label>
+                        </fieldset>
+                        <div class="form-group">
+                            <label for="diary-title">제목</label>
+                            <input type="text" id="diary-title" placeholder="제목을 입력해 주세요." required>
+                        </div>
+                        <div class="form-group">
+                            <label for="diary-content">내용</label>
+                            <textarea id="diary-content" rows="4" placeholder="내용을 입력해 주세요." required></textarea>
+                        </div>
+                        <button type="submit">등록하기</button>
+                    </form>
+                </aside>
+            </div>
+        </main>
+
+        <footer class="app-footer">
+            <p>편지지 다이어리</p>
+            <p>Copyright © 2024. weniv Corp.</p>
+        </footer>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
