@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>일기 작성/수정</title>
+    <link rel="stylesheet" href="./style.css">
+    <script defer src="./javascript/edit.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <header class="main-header">
+            <h1>✍️ 일기 쓰기</h1>
+        </header>
+        <main class="main-content">
+            <form id="diary-form">
+                <fieldset class="mood-selector">
+                    <legend>오늘 기분은 어때요?</legend>
+                    <label><input type="radio" name="mood" value="🥰 행복해요" checked> 행복해요</label>
+                    <label><input type="radio" name="mood" value="🙂 슬퍼요"> 슬퍼요</label>
+                    <label><input type="radio" name="mood" value="😭 그럭저럭"> 그럭저럭</label>
+                </fieldset>
+                <div class="form-group">
+                    <label for="diary-title">제목</label>
+                    <input type="text" id="diary-title" placeholder="제목을 입력해 주세요." required>
+                </div>
+                <div class="form-group">
+                    <label for="diary-content">내용</label>
+                    <textarea id="diary-content" rows="4" placeholder="내용을 입력해 주세요." required></textarea>
+                </div>
+                <button type="button" onclick="location.href='./index.html'">취소</button>
+                <button type="submit">저장하기</button>
+            </form>
+        </main>
+        <footer class="app-footer">
+            <p>© 2024. My Diary</p>
+        </footer>
+    </div>
+</body>
+</html>

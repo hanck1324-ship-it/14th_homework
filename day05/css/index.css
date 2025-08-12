@@ -1,0 +1,52 @@
+// 페이지의 모든 콘텐츠가 로드된 후에 스크립트를 실행합니다.
+window.onload = () => {
+  // 1. 주소(URL)에서 일기 ID 가져오기
+  const urlParams = new URLSearchParams(window.location.search);
+  const diaryId = urlParams.get("id"); 
+  /* // 예: ?id=1723456789012 -> 1723456789012 */
+
+  // 만약 diaryId가 없다면, 목록 페이지로 돌려보냅니다.
+  if (!diaryId) {
+    alert("잘못된 접근입니다.");
+    window.location.href = "./index.html";
+    return;
+  }
+
+  // 2. localStorage에서 전체 일기 데이터 가져오기
+  const diaries = JSON.parse(localStorage.getItem("diaries")) || [];
+
+  // 3. ID에 해당하는 일기 데이터 찾기
+  const diary = diaries.find((d) => d.id == diaryId);
+
+  // ID에 해당하는 일기가 없다면, 오류 메시지를 보여주고 목록 페이지로 이동합니다.
+  if (!diary) {
+    alert("해당하는 일기를 찾을 수 없습니다.");
+    window.location.href = "./index.html";
+    return;
+  }
+
+  // 4. 찾은 데이터로 HTML placeholder 채우기
+  document.getElementById("HTML_일기상세제목보여주는곳").innerText = diary.title;
+  document.getElementById("HTML_일기상세내용보여주는곳").innerText = diary.content;
+  document.getElementById("HTML_날짜보여주는곳").innerText = new Date(
+    diary.date
+  ).toLocaleDateString();
+  document.getElementById("HTML_일기기분보여주는곳").innerText = diary.mood;
+
+  // 기분에 맞는 이미지 설정
+  const moodImage = document.getElementById("HTML_기분이미지보여주는곳");
+  // (실제 이미지 경로에 맞게 수정해주세요)
+  const moodImagePaths = {
+    행복: "./assets/images/happy.png",
+    슬픔: "./assets/images/sad.png",
+    보통: "./assets/images/soso.png",
+  };
+  moodImage.src = moodImagePaths[diary.mood] || moodImagePaths["보통"];
+
+  // 5. '수정' 버튼에 이벤트 리스너 추가
+  const editButton = document.getElementById("HTML_수정하러가기버튼");
+  editButton.onclick = () => {
+    // 수정 페이지로 이동할 때, 현재 일기의 ID를 함께 넘겨줍니다.
+    window.location.href = `./edit.html?id=${diaryId}`;
+  };
+};
