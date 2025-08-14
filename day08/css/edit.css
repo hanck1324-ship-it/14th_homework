@@ -1,6 +1,27 @@
 /* edit.css */
 
-.CSS_일기수정하는곳 {
+.css_일기쓰기 {
+/* Frame 20 */
+
+/* 오토레이아웃 */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 24px;
+
+width: 1920px;
+height: 1454px;
+
+
+/* 내부 오토레이아웃 */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+}
+
+.CSS_일기수정하는곳곳 {
     display: flex;
     flex-direction: column;
     gap: 32px;
@@ -43,7 +64,7 @@
     gap: 16px;
 }
 
-.CSS_버튼 {
+.CSS_버튼튼 {
     padding: 12px 24px;
     border-radius: 8px;
     border: none;
