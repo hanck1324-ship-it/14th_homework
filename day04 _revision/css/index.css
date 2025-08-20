@@ -1,9 +1,30 @@
-/* 기존 index.css 내용은 그대로 두세요. */
-/* ... */
+/*여기서 날아가서 다시 정리 */
 
-/* ==================================
-   파일 맨 아래에 아래 코드를 추가하세요.
-   ================================== */
+.바디 {
+/* Frame 18 */
+
+/* 오토레이아웃 */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 0px;
+gap: 42px;
+
+width: 1920px;
+height: 1257px;
+
+
+/* 내부 오토레이아웃 */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+}
+
+
+
+
+
 
 /* '+ 일기쓰기' 버튼 스타일 */
 #open-modal-btn {

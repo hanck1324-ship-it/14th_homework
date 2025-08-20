@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>민지의 다이어리</title>
+ 
+    <title>ricky의 다이어리</title>
+
     <link rel="stylesheet" href="./index.css">
+
 </head>
+
+
 <body>
     <div class="가장큰배경">
         <div class="헤더">
@@ -15,7 +18,7 @@
         </div>
         <div class="바디">
             <div class="바디__배너">
-                <img src="./assets/images/배너.png" alt="">
+                
             </div>
             <div class="바디__메인섹션">
                 <div class="바디__메인섹션__메뉴섹션">
@@ -24,7 +27,24 @@
                         <span>사진보관함</span>
                     </div>
                 </div>
-                <div class="바디__메인섹션__필터섹션">
+                <div class="감정일기기록섹션"> 
+                <div class= " 감정상자"> 
+                    <div class = "감정상자1" >감정그림1</div>
+                    <div class = "감정상자_설명박스">
+                        <div= class="감정표현_날짜"> 감정표현_날짜 </div>
+                        <textarea name="" id=""></textarea>
+
+                    </div> 
+
+
+                </div>
+                
+                
+                
+                </div>
+                
+                
+                    <div class="바디__메인섹션__필터섹션">
                     <div class="바디__메인섹션__필터섹션__필터">
                         <select id="필터" onchange="필터링기능(event)">
                             <option>전체</option>
@@ -37,6 +57,8 @@
                         <button id="open-modal-btn">+ 일기쓰기</button>
                     </div>
                 </div>
+
+
 
                 <div class="바디__메인섹션__아티클섹션">
                     <div class="바디__메인섹션__아티클섹션__일기칸" id="일기칸">
@@ -58,7 +80,7 @@
                 <input type="radio" name="감정-모달" value="슬퍼요">슬퍼요
                 <input type="radio" name="감정-모달" value="놀랐어요">놀랐어요
                 <input type="radio" name="감정-모달" value="화나요">화나요
-                <input type="radio" name="감정-모달" value="기타">기타
+                <input type="radio" name="감정-모달" value="그럭저럭">그럭적럭
             </div>
             <div class="바디__메인__제목섹션">
                 <span>제목</span>
@@ -70,10 +92,11 @@
             </div>
             <div class="바디__메인__버튼섹션">
                 <button type="button" id="modal-close-btn" class="바디__메인__버튼섹션__취소버튼"><img src="./assets/images/취소버튼.png" alt="취소"></button>
-                <button id="modal-submit-btn" class="바디__메인__버튼섹션__수정버튼"><img src="./assets/images/등록하기.png" alt="등록하기"></button>
+                <button id="modal-submit-btn" class="바디__메인__버튼섹션__수정버튼"><img src="../assets/등록하기기" alt="등록하기"></button>
             </div>
         </div>
     </div>
+
 
     <script src="./index.js"></script>
 </body>
