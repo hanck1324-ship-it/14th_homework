@@ -108,7 +108,4 @@ const 게시글등록페이지 = () => {
   ReactDOM.render(<게시글등록페이지 />, document.getElementById("root"));
 
 
-        ReactDOM.render(
-            <게시글등록페이지 />, 
-            document.getElementById('root')
-        );
+        
