@@ -6,17 +6,17 @@ import ReactDOM from "react-dom/client";
 // React 18에는 서버에서도 React 컴포넌트를 미리 렌더링해서 보내주는 강력한 기능
 import "./index.css"
 import App from "../App"
-import BoardsDetail from "."
-import { createBrowserRouter, RouterProvider } from 'react-router';
-import Aaa from './routes/aaa';
-import Bbb from './routes/bbb';
-import App from '../App';
+import BoardsDetail from "./routes/boards/detail"
+import BoardNews from "./routes/boards/new/BoardsNew"
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import reportWebVitals from './re';
 
-import { createBrowserRouter, RouterProvider } from 'react-router';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';// react-router에서 교체 
+import BoardsNew from "./routes/boards/new/BoardsNew";
 const pagecontent = createBrowserRouter([
   { path: "/", element: <App /> },
-  { path: "/aaa", element: <Aaa /> },
-  { path: "/bbb", element: <Bbb /> }
+  { path: "/boards/new", element:  <BoardsNew /> },
+  { path: "/boards/detail", element: <BoardsDetail /> }
 ]);
 
 function Root() {
