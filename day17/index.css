@@ -94,6 +94,7 @@ hr {
 
 
 
+
 /* =================================== */
 /* B. 폼 요소 (Form Elements) */
 /* =================================== */
@@ -175,6 +176,7 @@ hr {
 /* =================================== */
 
 
+
 /* 주소 검색 영역 */
 .css_우편번호검색영역 {
   display: flex;
@@ -215,8 +217,14 @@ flex-grow: 0;
 }
 
 
-.image-uploader-box {
+/* 사진 업로드 영역 */
+.css_이미지업로드영역 {
+  display: flex;
+  gap: 20px;
+}
 
+.css_이미지업로드상자 {
+  width: 80px;
 
   height: 80px;
   background: #F2F2F2;
@@ -253,11 +261,6 @@ flex-grow: 0;
 /* 취소 버튼 */
 .css_취소 {
   padding: 12px 24px;
-  background: white;
-  border: 1px solid #d1d1d1;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 16px;
   font-weight: 500;
 
 }
@@ -271,5 +274,4 @@ flex-grow: 0;
   border-radius: 8px;
   cursor: pointer;
   font-size: 16px;
-  font-weight: 500;
-} 
+  font-weight: 500;}
