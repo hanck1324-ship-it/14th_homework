@@ -1,10 +1,10 @@
 import "./BoardsDetail.css";
-import location from "../../../assets/location.png";
-import pencil from "../../../assets/pencil.png";
-import profileImage from "../../../assets/profile_image.png";
-import link from "../../../assets/link.png";
-import heart from "../../../assets/heart.png";
-import openthesea from "../../../assets/openthesea.png";
+import location from 
+import pencil from 
+import profileImage from 
+import link from 
+import heart from 
+import openthesea from 
 
 
 const BoardsDetail = () => {
