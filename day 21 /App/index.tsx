@@ -99,8 +99,8 @@ const 게시글등록페이지 = () => {
     );
   };
   
-  // '게시글등록페이지' 컴포넌트를 id가 'root'인 div에 그려줍니다.
-  ReactDOM.render(<게시글등록페이지 />, document.getElementById("root"));
-
+  // // '게시글등록페이지' 컴포넌트를 id가 'root'인 div에 그려줍니다.
+  // ReactDOM.render(<게시글등록페이지 />, document.getElementById("root"));
+  // *Next.js 13+**에서는 app 디렉토리를 사용하면, pages/_app.tsx나 ReactDOM.render를 쓸 필요가 없습니다.
 
         

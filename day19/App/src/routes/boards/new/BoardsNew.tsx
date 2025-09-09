@@ -1,200 +1,252 @@
-// import { useState, ChangeEvent, MouseEvent } from "react";
-// import "./BoardsNew.css";
+"use client";
+import React, {ChangeEvent, useState } from "react";
+import styles from "./styles.module.css"; // 레퍼런스의 CSS Modules를 사용합니다.
+import Image from "next/image"; // Next.js의 Image 컴포넌트를 사용합니다.
+import addImage from ""
+// 1. 이미지 경로를 관리하는 부분은 레퍼런스 코드를 따릅니다.
+const IMAGE_SRC = {
+  addImage: {
+    src: require("@assets/add_image.png"),
+    alt: "사진추가이미지",
+  },
+};
 
-// // 1. 설계도 만들기 (interface 사용)
-// // 입력값(writer, password 등)과 에러 메시지의 모양을 미리 정의합니다.
-// // 이렇게 하면 TypeScript가 우리 코드를 더 잘 이해하고 도와줄 수 있어요.
-// interface IFormData {
-//   writer: string;
-//   password: string;
-//   title: string;
-//   contents: string;
-// }
+// 2. 입력값과 에러의 타입을 미리 정의해두면 실수를 줄일 수 있어요. (TypeScript)
+interface IInputs {
+  writer: string;
+  password: string;
+  title: string;
+  contents: string;
+}
 
-// interface IFormErrors {
-//   writer?: string;
-//   password?: string;
-//   title?: string;
-//   contents?: string;
-// }
+interface IErrors {
+  writer?: string;
+  password?: string;
+  title?: string;
+  contents?: string;
+}
 
-// const BoardsNew = (): JSX.Element => {
-//   // 2. 상태(State)를 객체로 관리하기
-//   // useState를 여러 번 쓰지 않고, inputs와 errors라는 큰 바구니 2개로 관리하면
-//   // 나중에 입력창이 추가되어도 코드가 지저분해지지 않아요.
-//   const [inputs, setInputs] = useState<IFormData>({
-//     writer: "",
-//     password: "",
-//     title: "",
-//     contents: "",
-//   });
-//   const [errors, setErrors] = useState<IFormErrors>({});
+export default function BoardsNewPage() {
+  // 3. 소정님의 효율적인 '객체' 상태 관리 방식을 그대로 사용합니다.
+  const [inputs, setInputs] = useState<IInputs>({
+    writer: "",
+    password: "",
+    title: "",
+    contents: "",
+  });
+  const [errors, setErrors] = useState<IErrors>({});
 
-//   // 3. 모든 입력창을 관리하는 똑똑한 함수 하나 만들기
-//   // event.target.name을 사용해서 어떤 입력창에서 온 요청인지 알아채는 방식이에요.
-//   // 이렇게 하면 입력창마다 함수를 만들 필요가 없어서 아주 효율적입니다.
-//   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-//     const { name, value } = e.target;
-//     setInputs((prev) => ({
-//       ...prev,
-//       [name]: value,
-//     }));
-//     // 사용자가 무언가 입력하기 시작하면, 에러 메시지를 바로 지워주는 센스!
-//     if (value) {
-//       setErrors((prev) => ({ ...prev, [name]: "" }));
-//     }
-//   };
+  // 4. 모든 입력창을 처리하는 똑똑한 함수도 그대로 가져옵니다.
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setInputs((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+    if (value) {
+      setErrors((prev) => ({ ...prev, [name]: "" }));
+    }
+  };
 
-//   // 4. '등록하기' 버튼을 눌렀을 때 실행될 최종 검사 함수
-//   const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
-//     // isValid 깃발 방식으로 깐깐하게 검사해요.
-//     let isValid = true;
-//     const newErrors: IFormErrors = {};
+  // 5. 등록 버튼 클릭 시 유효성을 검사하는 함수입니다.
+  // const handleSubmit = () => {
+  //   const newErrors: IErrors = {};
+  //   if (!inputs.writer.trim()) newErrors.writer = "필수입력 사항입니다.";
+  //   if (!inputs.password.trim()) newErrors.password = "필수입력 사항입니다.";
+  //   if (!inputs.title.trim()) newErrors.title = "필수입력 사항입니다.";
+  //   if (!inputs.contents.trim()) newErrors.contents = "필수입력 사항입니다.";
 
-//     if (!inputs.writer.trim()) {
-//       newErrors.writer = "작성자를 입력해주세요.";
-//       isValid = false;
-//     }
-//     if (!inputs.password.trim()) {
-//       newErrors.password = "비밀번호를 입력해주세요.";
-//       isValid = false;
-//     }
-//     if (!inputs.title.trim()) {
-//       newErrors.title = "제목을 입력해주세요.";
-//       isValid = false;
-//     }
-//     if (!inputs.contents.trim()) {
-//       newErrors.contents = "내용을 입력해주세요.";
-//       isValid = false;
-//     }
+  //   setErrors(newErrors);
 
-//     setErrors(newErrors);
+  const handleSubmit = () => {
+    // 1. '에러가 있는가?'를 기억할 깃발을 하나 준비합니다.
+    let hasError = false;
 
-//     // 모든 검사를 통과했다면(isValid가 여전히 true라면), 성공!
-//     if (isValid) {
-//       alert("게시글이 성공적으로 등록되었습니다!");
-//       console.log("제출할 데이터:", inputs);
-//       // 나중에 이곳에서 서버로 데이터를 보내는 코드를 추가하게 됩니다.
-//     }
-//   };
+    // 2. 각 입력창을 하나씩 순서대로 검사합니다.
+    // 작성자 검사
+    if (inputs.writer.trim() === "") {
+      setErrors((prev) => ({ ...prev, writer: "필수입력 사항입니다." }));
+      hasError = true; // 에러를 발견했으니 깃발을 올립니다!
+    } else {
+      setErrors((prev) => ({ ...prev, writer: "" })); // 통과했다면 에러 메시지를 지웁니다.
+    }
 
-// import React, { ChangeEvent, MouseEvent, useState } from "react";
-// import "./BoardsNew.css";
+    // 비밀번호 검사
+    if (inputs.password === "") {
+      setErrors((prev) => ({ ...prev, password: "필수입력 사항입니다." }));
+      hasError = true; // 에러 발견!
+    } else {
+      setErrors((prev) => ({ ...prev, password: "" }));
+    }
 
-// // 입력값과 에러 객체의 설계도를 미리 정의합니다.
-// interface IFormData {
-//   writer: string;
-//   password: string;
-//   title: string;
-//   contents: string;
-// }
+    // 제목 검사
+    if (inputs.title.trim() === "") {
+      setErrors((prev) => ({ ...prev, title: "필수입력 사항입니다." }));
+      hasError = true; // 에러 발견!
+    } else {
+      setErrors((prev) => ({ ...prev, title: "" }));
+    }
 
-// interface IFormErrors {
-//   writer?: string;
-//   password?: string;
-//   title?: string;
-//   contents?: string;
-// }
+    // 내용 검사
+    if (inputs.contents.trim() === "") {
+      setErrors((prev) => ({ ...prev, contents: "필수입력 사항입니다." }));
+      hasError = true; // 에러 발견!
+    } else {
+      setErrors((prev) => ({ ...prev, contents: "" }));
+    }
 
-// const BoardsNew = (): JSX.Element => {
-//   // 1. 상태를 하나의 객체로 관리하여 코드를 간결하게 유지합니다.
-//   const [inputs, setInputs] = useState<IFormData>({
-//     writer: "",
-//     password: "",
-//     title: "",
-//     contents: "",
-//   });
+    // 3. 모든 검사가 끝난 후, 깃발을 최종 확인합니다.
+    // hasError 깃발이 한 번도 올라가지 않았다면(여전히 false라면), 모든 검사를 통과한 것입니다.
+    if (!hasError) {
+      alert("게시글 등록이 가능한 상태입니다!");
+    }
+  };
 
-//   const [errors, setErrors] = useState<IFormErrors>({});
+    if (Object.keys(newErrors).length === 0) {
+      alert("게시글 등록이 가능한 상태입니다!");
+      console.log("제출할 데이터:", inputs);
+      // Day 21에서는 이 부분에 서버로 데이터를 전송하는 코드가 추가됩니다.
+    }
+  };
 
-//   // 2. 모든 input과 textarea의 변경을 하나의 함수로 처리합니다.
-//   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-//     const { name, value } = e.target;
-
-//     // name의 타입을 IFormData의 key 중 하나로 명확히 합니다.
-//     const inputName = name as keyof IFormData;
-
-//     setInputs((prev) => ({
-//       ...prev,
-//       [inputName]: value,
-//     }));
-
-//     // 사용자가 입력을 시작하면 해당 필드의 에러 메시지를 지웁니다.
-//     if (value) {
-//       setErrors((prev) => ({
-//         ...prev,
-//         [inputName]: "",
-//       }));
-//     }
-//   };
-
-//   // 3. 유효성 검사
-//   const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
-//     const newErrors: IFormErrors = {};
-
-//     if (!inputs.writer.trim()) newErrors.writer = "작성자를 입력해주세요.";
-//     if (!inputs.password) newErrors.password = "비밀번호를 입력해주세요.";
-//     if (!inputs.title.trim()) newErrors.title = "제목을 입력해주세요.";
-//     if (!inputs.contents.trim()) newErrors.contents = "내용을 입력해주세요.";
-
-//     setErrors(newErrors);
-
-//     // 에러가 없으면 제출 성공
-//     if (Object.keys(newErrors).length === 0) {
-//       alert("게시글이 성공적으로 등록되었습니다!");
-//       console.log("제출할 데이터:", inputs);
-//     }
-
-
-
-
-//   
-
-
-
-
-
-  // 모든 입력창에 값이 있는지 확인해서 버튼 활성화/비활성화를 결정해요.
+  // 버튼 활성화 여부를 결정하는 변수
   const isButtonDisabled = !inputs.writer || !inputs.password || !inputs.title || !inputs.contents;
 
+  // 6. 화면(JSX)은 레퍼런스 코드의 구조와 className을 사용합니다.
   return (
-    <div className="board-new">
-      <h1 className="board-new__title">게시물 등록</h1>
+    <div className={styles.layout}>
+      <div className={styles["enroll-subject"]}>
+        <div className={styles["enroll-subject-text"]}>게시물 등록</div>
+      </div>
+      <div className={styles["enroll-row-container"]}>
+        <div className={styles["enroll-row-section"]}>
+          <div className={styles["enroll-row-flex"]}>
+            <div className={styles["flex-half"]}>
+              <div className={styles["enroll-form-title"]}>
+                <div>작성자 </div>
+                <div className={styles["enroll-required-indicator"]}>*</div>
+              </div>
+              <input
+                type="text"
+                name="writer" // name 속성으로 어떤 입력창인지 구분합니다.
+                placeholder="작성자 명을 입력해 주세요."
+                className={styles["enroll-input"]}
+                onChange={handleInputChange}
+                value={inputs.writer}
+              />
+              <div className={styles["error-msg"]}>{errors.writer}</div>
+            </div>
+            <div className={styles["flex-half"]}>
+              <div className={styles["enroll-form-title"]}>
+                <div>비밀번호</div>
+                <div className={styles["enroll-required-indicator"]}>*</div>
+              </div>
+              <input
+                type="password"
+                name="password"
+                placeholder="비밀번호를 입력해 주세요."
+                className={styles["enroll-input"]}
+                onChange={handleInputChange}
+                value={inputs.password}
+              />
+              <div className={styles["error-msg"]}>{errors.password}</div>
+            </div>
+          </div>
+        </div>
+        <div className={styles["enroll-border"]}></div>
+        <div className={styles["enroll-row-section"]}>
+          <div className={styles["enroll-form-title"]}>
+            <div>제목</div>
+            <div className={styles["enroll-required-indicator"]}>*</div>
+          </div>
+          <input
+            type="text"
+            name="title"
+            className={styles["enroll-input"]}
+            placeholder="제목을 입력해 주세요."
+            onChange={handleInputChange}
+            value={inputs.title}
+          />
+          <div className={styles["error-msg"]}>{errors.title}</div>
+        </div>
+        <div className={styles["enroll-border"]}></div>
+        <div className={styles["enroll-row-section"]}>
+          <div className={styles["enroll-form-title"]}>
+            <div>내용</div>
+            <div className={styles["enroll-required-indicator"]}>*</div>
+          </div>
+          <textarea
+            name="contents"
+            placeholder="내용을 입력해 주세요."
+            className={`${styles["enroll-input"]} ${styles["enroll-textarea"]}`}
+            onChange={handleInputChange}
+            value={inputs.contents}
+          ></textarea>
+          <div className={styles["error-msg"]}>{errors.contents}</div>
+        </div>
+        {/* 주소, 유튜브, 사진 첨부 등 나머지 부분은 레퍼런스 코드와 동일하게 유지 */}
+        <div className={styles["enroll-row-section"]}>
+          <div className={styles["enroll-form-title"]}>
+            <div>주소</div>
+          </div>
+          <div className={styles["enroll-address-firstrow"]}>
+            <input
+              type="number"
+              className={styles["zipcode-input"]}
+              placeholder="12345"
+            />
+            <button className={styles["zipcode-search-button"]}>
+              우편번호 검색
+            </button>
+          </div>
 
-      {/* -- JSX 부분 -- */}
-      {/* 작성자 & 비밀번호 */}
-      <div className="board-new__section board-new__section--row">
-        <div className="board-new__input-group">
-          <label>작성자</label>
-          <input name="writer" onChange={handleInputChange} value={inputs.writer} />
-          {errors.writer && <div className="board-new__error-message">{errors.writer}</div>}
+          <input
+            placeholder="주소를 입력해주세요."
+            className={styles["enroll-input"]}
+            type="text"
+          />
+          <input
+            placeholder="상세주소"
+            className={styles["enroll-input"]}
+            type="text"
+          />
         </div>
-        <div className="board-new__input-group">
-          <label>비밀번호</label>
-          <input name="password" type="password" onChange={handleInputChange} value={inputs.password} />
-          {errors.password && <div className="board-new__error-message">{errors.password}</div>}
+        <div className={styles["enroll-border"]}></div>
+        <div className={styles["enroll-row-section"]}>
+          <div className={styles["enroll-form-title"]}>
+            <div>유튜브 링크</div>
+          </div>
+          <input
+            className={styles["enroll-input"]}
+            placeholder="링크를 입력해 주세요."
+          />
+        </div>
+
+        <div className={styles["enroll-border"]}></div>
+
+        <div className={styles["enroll-row-section"]}>
+          <div>사진 첨부</div>
+          <div className={styles["picture-enroll-row"]}>
+            <Image src={IMAGE_SRC.addImage.src} alt={IMAGE_SRC.addImage.alt} />
+            <Image src={IMAGE_SRC.addImage.src} alt={IMAGE_SRC.addImage.alt} />
+            <Image src={IMAGE_SRC.addImage.src} alt={IMAGE_SRC.addImage.alt} />
+          </div>
         </div>
       </div>
-      {/* 제목 */}
-      <div className="board-new__section">
-        <label>제목</label>
-        <input name="title" onChange={handleInputChange} value={inputs.title} />
-        {errors.title && <div className="board-new__error-message">{errors.title}</div>}
-      </div>
-      {/* 내용 */}
-      <div className="board-new__section">
-        <label>내용</label>
-        <textarea name="contents" onChange={handleInputChange} value={inputs.contents} />
-        {errors.contents && <div className="board-new__error-message">{errors.contents}</div>}
-      </div>
-      {/* 등록하기 버튼 */}
-      <div className="board-new__footer">
-        <button onClick={handleSubmit} disabled={isButtonDisabled}>
+      <div className={styles["enroll-button-container"]}>
+        <button className={styles["enroll-cancel-button"]}>취소</button>
+        <button
+          className={
+            isButtonDisabled
+              ? `${styles["enroll-submit-button"]} ${styles["disabled"]}`
+              : styles["enroll-submit-button"]
+          }
+          onClick={handleSubmit} // 함수 이름 변경
+          disabled={isButtonDisabled}
+        >
           등록하기
         </button>
       </div>
     </div>
   );
-};
-
-export default BoardsNew;
+}
