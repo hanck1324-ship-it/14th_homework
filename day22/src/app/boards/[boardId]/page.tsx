@@ -1,11 +1,52 @@
 import "./styles.modules.css";
-import location from "../../../../public/assets/location.png"
-import pencil from  "../../../../public/assets/pencil.png"
-import profileImage from "../../../../public/assets/profile_image.png" 
-import link from   "../../../../public/assets/link.png"
-import heart from "../../../../public/assets/heart.png"
-import openthesea from "../../../../public/assets/openthesea.png"" 
-import brokenheart
+import location from "../../../../assets/location.png";
+import pencil from "../../../../assets/pencil.png";
+import profileImage from "../../../../assets/profile_image.png";
+import link from "../../../../assets/link.png";
+import heart from "../../../../assets/heart.png";
+import openthesea from "../../../../assets/openthesea.png";
+import brokenheart from "../../../../assets/brokenheart.png";
+
+
+export function BoardDetail() {
+    const { boardId } = useParams();
+    const post = FAKE_POST_DATA;
+    return <div>BoardDetail</div>;
+  }
+  
+  export function BoardsDetail() {
+    return <div>BoardsDetail</div>;
+  }
+  
+
+  
+    return (
+        <div className="board-detail">
+            {/* ... (제목, 헤더 등 이전 코드와 동일) ... */}
+            <h1 className="board-detail__title">{post.title}</h1>
+            {/* ... */}
+            <div className="board-detail__divider"></div>
+
+            <div className="board-detail__content">
+                {post.imageUrl && <img src={post.imageUrl} alt="게시물 이미지" className="board-detail__image" />}
+                
+                {/* 바로 이 부분입니다! */}
+                <div className="board-detail__text">
+                    {post.contents.split('/ line이 비어있으면 <br\n').map((line, index) => (
+                        / /> 태그로 진짜 '빈 줄'을 만들어줍니다.
+                        line ? <div key={index}>{line}</div> : <br key={index} />
+                    ))}
+                </div>
+                
+                {/* ... (유튜브, 좋아요/싫어요, 푸터 등 이전 코드와 동일) ... */}
+            </div>
+            {/* ... */}
+        </div>
+    );
+}; l 
+
+
+
 
 
 const BoardsDetail = () => {
@@ -111,13 +152,7 @@ const BoardsDetail = () => {
 
 export default BoardsDetail;
 
-// 아래의 불필요한 코드들을 모두 삭제했습니다.
-//    </div>
-//   )
-// }
-//
-// /
-//
+/
 // // export default function BoardDetail() {
 // //     const { boardId } = useParams();
 // //     const post = FAKE_POST_DATA;
