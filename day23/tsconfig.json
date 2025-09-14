@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
     "baseUrl": "src",
-    "paths": { "@assets/*": ["assets/*"] },
+    "paths": {
+      "@assets/*": ["assets/*"]
+    },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
