@@ -2,11 +2,11 @@
 
 "use client";
 
-import { gql, useMutation } from "@apollo/client";
-import { useParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-
-// 등록 Mutation
+import { gql, useMutation } from "@apollo/client"; // 서버와 통신을 위한 도구 
+import { useParams, useRouter } from "next/navigation"; //페이지 이동, 주소 관리를 위한 도구
+import { useEffect, useState } from "react"; // 컴포넌트와 기억 (state), 특점 시점 행동 (effect)을 위한 도구
+import styles from "./styles.module.css"; 
+// 등록 Mutation 새 게시글 만들어주세요 
 const CREATE_BOARD = gql`
   mutation createBoard($createBoardInput: CreateBoardInput!) {
     createBoard(createBoardInput: $createBoardInput) {
@@ -15,7 +15,7 @@ const CREATE_BOARD = gql`
   }
 `;
 
-// 수정 Mutation
+// 수정 Mutation 기존 게시글 수정해주세요 
 const UPDATE_BOARD = gql`
   mutation updateBoard(
     $updateBoardInput: UpdateBoardInput!
@@ -58,7 +58,7 @@ export default function BoardsWrite(props: IBoardsWriteProps) {
     if (props.isEdit && props.data) {
       setInputs({
         writer: props.data.fetchBoard.writer,
-        password: "", // 비밀번호는 보안상 비워둡니다.
+        password: "********", // 비밀번호는 보안상 비워둡니다.
         title: props.data.fetchBoard.title,
         contents: props.data.fetchBoard.contents,
       });
