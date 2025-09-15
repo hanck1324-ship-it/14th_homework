@@ -1,16 +1,21 @@
 "use client"
 
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from "@apollo/client";
 
 interface IApolloSetting {
     children: React.ReactNode
 }
+
 export default function ApolloSetting(props: IApolloSetting) {
-    const client = new ApolloClient({
-        // 아래 uri 주소를 올바른 주소로 수정해주세요!
+    const httpLink = createHttpLink({
+        // ❗️ 바로 이 주소가 올바른 서버 주소입니다.
         uri: "http://main-practice.codebootcamp.co.kr/graphql",
+    });
+
+    const client = new ApolloClient({
+        link: httpLink,
         cache: new InMemoryCache()
-    })    
+    });
 
     return (
         <ApolloProvider client={client}>

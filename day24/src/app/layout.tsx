@@ -1,4 +1,4 @@
-import "./globals.css"; // global.css -> globals.css 오타 수정
+import "./globals.css";
 import { Inter } from "next/font/google";
 import ApolloSetting from "commons/settings/apollo-setting";
 

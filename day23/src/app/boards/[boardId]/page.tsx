@@ -1,98 +1,119 @@
 "use client";
 
-import styles from "."
+import { useQuery, gql } from "@apollo/client";
+import { useParams, useRouter } from "next/navigation";
+import Image from "next/image";
+import styles from "./styles.module.css";
 
-const BoardsDetail = () => {
-    return (
-        <div className="Css_detail_page_body">
+// 1. [수정] 올바른 경로 별칭으로 이미지들을 import 합니다.
+import profileImage from "@assets/profile_image.png";
+import linkImage from "@assets/link.png";
+import locationImage from "@assets/location.png";
+import heartImage from "@assets/heart.png";
+import brokenheartImage from "@assets/brokenheart.png";
+import pencilImage from "@assets/pencil.png";
+import listImage from "@assets/spinningtop.png";
+import contentImage from "@assets/openthesea.png";
+import video from "@assets/video.png"
+
+const IMAGE_SRC = {
+  profile: { src: profileImage, alt: "프로필이미지" },
+  link: { src: link, alt: "링크아이콘" },
+  location: { src: location, alt: "위치아이콘" },
+  content: { src: openthesea, alt: "콘텐츠 이미지" },
+  video: { src: video, alt: "너튜브사진" },
+  dislike: { src: brokenheart, alt: "싫어요" },
+  like: { src: heart, alt: "좋아요" },
+  list: { src: spinningtop, alt: "목록아이콘" },
+  edit: { src: pencil, alt: "수정아이콘" },
+} as const;
 
 
-            <div className="detail-layout">
-                <div className="detail-body">
-                    <div className="detail-frame">
-                        <div className="detail-subject">
-                            살어리 살어리랏다 쳥산(靑山)애 살어리랏다멀위랑 ᄃᆞ래랑 먹고
-                            쳥산(靑山)애 살어리랏다얄리얄리 얄랑셩 얄라리 얄라
-                        </div>
-                        <div className="detail-metadata-container">
-                            <div className="detail-metadata-profile">
-                                <img src={profileImage} alt="프로필이미지" />
-                                <div>홍길동</div>
-                            </div>
-                            <div className="detail-metadata-date">2024.11.11</div>
-                        </div>
-                        <div className="enroll-border"></div>
-                        <div className="detail-metadata-icon-container">
-                            {/* linkImage -> link 로 수정 */}
-                            <img src={link} alt="링크아이콘" />
-                            {/* locationImage -> location 으로 수정 */}
-                            <img src={location} alt="위치아이콘" />
-                        </div>
-                        <div className="detail-content-container">
-                        <img src={openthesea} alt="바다사진" className="detail-content-image"/>
+// 2. [추가] 서버에 데이터를 요청하기 위한 GraphQL Query를 정의합니다.
 
-                            <div className="detail-content-text">
-                                <div>살겠노라 살겠노라. 청산에 살겠노라.</div>
-                                <div>머루랑 다래를 먹고 청산에 살겠노라.</div>
-                                <div>얄리얄리 얄랑셩 얄라리 얄라</div>
-                                <div className="text-gap"></div>
-                                <div>우는구나 우는구나 새야. 자고 일어나 우는구나 새야.</div>
-                                <div>너보다 시름 많은 나도 자고 일어나 우노라.</div>
-                                <div>얄리얄리 얄라셩 얄라리 얄라</div>
-                                <div className="text-gap"></div>
-                                <div>
-                                    갈던 밭(사래) 갈던 밭 보았느냐. 물 아래(근처) 갈던 밭 보았느냐
-                                </div>
-                                <div>이끼 묻은 쟁기를 가지고 물 아래 갈던 밭 보았느냐.</div>
-                                <div>얄리얄리 얄라셩 얄라리 얄라</div>
-                                <div className="text-gap"></div>
-                                <div>이럭저럭 하여 낮일랑 지내 왔건만</div>
-                                <div>올 이도 갈 이도 없는 밤일랑 또 어찌 할 것인가.</div>
-                                <div>얄리얄리 얄라셩 얄라리 얄라</div>
-                                <div className="text-gap"></div>
-                                <div>어디다 던지는 돌인가 누구를 맞히려던 돌인가.</div>
-                                <div>미워할 이도 사랑할 이도 없이 맞아서 우노라.</div>
-                                <div>얄리얄리 얄라셩 얄라리 얄라</div>
-                                <div className="text-gap"></div>
-                                <div>살겠노라 살겠노라. 바다에 살겠노라.</div>
-                                <div>나문재, 굴, 조개를 먹고 바다에 살겠노라.</div>
-                                <div>얄리얄리 얄라셩 얄라리 얄라</div>
-                                <div className="text-gap"></div>
-                                <div>가다가 가다가 듣노라. 에정지(미상) 가다가 듣노라.</div>
-                                <div>
-                                    사슴(탈 쓴 광대)이 솟대에 올라서 해금을 켜는 것을 듣노라.
-                                </div>
-                                <div>얄리얄리 얄라셩 얄라리 얄라</div>
-                                <div className="text-gap"></div>
-                                <div>가다 보니 배불룩한 술독에 독한 술을 빚는구나.</div>
-                                <div>
-                                    조롱박꽃 모양 누룩이 매워 (나를) 붙잡으니 내 어찌 하리이까.[1]
-                                </div>
-                                <div>얄리얄리 얄라셩 얄라리 얄라</div>
-                            </div>
+const FETCH_BOARD = gql`
+  query fetchBoard($boardId: ID!) {
+    fetchBoard(boardId: $boardId) {
+      _id
+      writer
+      title
+      contents
+      youtubeUrl
+      likeCount
+      dislikeCount
+      images
+      user {
+        _id
+        email
+        name
+        picture
+      }
+      createdAt
+      updatedAt
+      deletedAt
+    }
+  }
+`;
 
-                            <div className="detail-content-goodorbad">
-                                <div className="detail-good-container">
-                                    <img src={brokenheart} alt="좋아요" />
-                                    <div className="detail-bad-text">24</div>
-                                </div>
-                                <div className="detail-good-container">
-                                    <img src={heart} alt="좋아요" />
-                                    <div className="detail-good-text">12</div>
-                                </div>
-                            </div>
-                            <div className="detail-buttons-container">
-                                <button className="detail-button">
-                                </button>
-                                <button className="detail-button">
-                                    <img alt="수정아이콘" src={pencil} />
-                                    <div>수정하기</div>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+export default function BoardsDetailPage() {
+  const router = useRouter();
+  const params = useParams();
+  const boardId = params.boardId;
+
+  // 3. [추가] useQuery로 서버에서 진짜 데이터를 가져옵니다.
+  const { data, loading } = useQuery(FETCH_BOARD, {
+    variables: { boardId: boardId },
+  });
+
+  if (loading) return <div>게시글을 불러오는 중입니다...</div>;
+
+  return (
+    <div className={styles.detailLayout}>
+      <div className={styles.detailBody}>
+        <div className={styles.detailFrame}>
+          {/* 4. [수정] 하드코딩된 텍스트 대신 `data`에서 받아온 실제 데이터를 사용합니다. */}
+          <div className={styles.detailSubject}>{data?.fetchBoard?.title}</div>
+          <div className={styles.detailMetadataContainer}>
+            <div className={styles.detailMetadataProfile}>
+              <Image src={profileImage} alt="프로필이미지" width={40} height={40} />
+              <div>{data?.fetchBoard?.writer}</div>
             </div>
+            <div className={styles.detailMetadataDate}>
+                {data?.fetchBoard?.createdAt.split("T")[0]}
+            </div>
+          </div>
+          <div className={styles.enrollBorder}></div>
+          <div className={styles.detailMetadataIconContainer}>
+            <Image src={linkImage} alt="링크아이콘" />
+            <Image src={locationImage} alt="위치아이콘" />
+          </div>
+          <div className={styles.detailContentContainer}>
+            <Image src={contentImage} alt="게시글 이미지" className={styles.detailContentImage}/>
+            <div className={styles.detailContentText}>{data?.fetchBoard?.contents}</div>
+            <div className={styles.detailContentGoodOrBad}>
+              <div className={styles.detailGoodContainer}>
+                <Image src={heartImage} alt="좋아요" />
+                <div className={styles.detailGoodText}>{data?.fetchBoard?.likeCount}</div>
+              </div>
+              <div className={styles.detailGoodContainer}>
+                <Image src={brokenheartImage} alt="싫어요" />
+                <div className={styles.detailBadText}>{data?.fetchBoard?.dislikeCount}</div>
+              </div>
+            </div>
+            {/* 5. [수정] 버튼에 실제 동작하는 기능을 연결합니다. */}
+            <div className={styles.detailButtonsContainer}>
+              <button className={styles.detailButton} onClick={() => router.push('/boards')}>
+                <Image src={listImage} alt="목록아이콘" />
+                <div>목록으로</div>
+              </button>
+              <button className={styles.detailButton} onClick={() => router.push(`/boards/${boardId}/edit`)}>
+                <Image src={pencilImage} alt="수정아이콘" />
+                <div>수정하기</div>
+              </button>
+            </div>
+          </div>
         </div>
-    );
-};
+      </div>
+    </div>
+  );
+}
