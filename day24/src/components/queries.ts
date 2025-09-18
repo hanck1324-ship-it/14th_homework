@@ -25,7 +25,7 @@ export const DELETE_BOARD = gql`
 `;
 
 
-export const 나의그래프큐엘셋팅 = gql`
+export const CREATE_BOARD = gql`
   mutation createBoard($createBoardInput: CreateBoardInput!) {
     createBoard(createBoardInput: $createBoardInput) {
       _id
@@ -72,7 +72,6 @@ export const UPDATE_BOARD = gql`
     }
   }
 `;
-
 
 export const FETCH_BOARD = gql`
   query fetchBoard($boardId: ID!) {
