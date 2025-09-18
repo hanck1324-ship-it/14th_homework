@@ -1,4 +1,4 @@
-/**/
+/*일단 레퍼런스 코드에서 css 거의 같을 수 밖에 없으니 네이밍 붙이는 거랑 내가 빠트린거 없는지  */
 
 .layout {
     display: flex;
@@ -26,7 +26,7 @@
     align-items: flex-start;
     flex: 1 0 0;
     border-radius: 8px;
-    background: var(--gray-50, #f2f2f2);
+    background: var(--gray-50, #f2f2f2); /**/
   }
   
   .enroll_subject_text {
