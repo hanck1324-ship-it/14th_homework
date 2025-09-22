@@ -27,7 +27,3 @@ export const DELETE_BOARD = gql`
   }
 `;
 
-//queries.ts (API 요청서를 보관할 레시피 북)
-
-//fetchBoards (s 있음): 목록 전체 (ID 필요 없음)
-//fetchBoard (s 없음): 특정 게시글 하나 (ID 필수)
