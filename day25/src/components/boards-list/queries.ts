@@ -3,7 +3,7 @@ import { gql } from "@apollo/client";
 // [요청서 1] 게시글 목록 조회 (Query) 상세보기용 fetchBoard러
 export const FETCH_BOARDS = gql`
   query FetchBoardForDetail {
-    fetchBoard {
+    fetchBoards {
       _id
       writer
       title
@@ -26,4 +26,3 @@ export const DELETE_BOARD = gql`
     deleteBoard(boardId: $boardId)
   }
 `;
-
