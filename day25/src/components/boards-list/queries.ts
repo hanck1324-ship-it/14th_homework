@@ -1,9 +1,9 @@
 import { gql } from "@apollo/client";
 
-// [요청서 1] 게시글 목록 조회 (Query)
+// [요청서 1] 게시글 목록 조회 (Query) 상세보기용 fetchBoard러
 export const FETCH_BOARDS = gql`
-  query {
-    fetchBoards {
+  query FetchBoardForDetail {
+    fetchBoard {
       _id
       writer
       title
@@ -28,3 +28,6 @@ export const DELETE_BOARD = gql`
 `;
 
 //queries.ts (API 요청서를 보관할 레시피 북)
+
+//fetchBoards (s 있음): 목록 전체 (ID 필요 없음)
+//fetchBoard (s 없음): 특정 게시글 하나 (ID 필수)
