@@ -5,7 +5,7 @@ import {
   CreateBoardDocument,
   UpdateBoardDocument,
   FetchBoardForWriteDocument,
-} from "src/commons/graphql/graphql";
+} from "commons/graphql/graphql";
 import { type IBoardWriteInput } from "./types";
 
 export const useBoardWrite = (isEdit: boolean) => {
