@@ -1,6 +1,6 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
-import ApolloSetting from "commons/setting/apollo-setting";
+import ApolloSetting from "@/commons/setting/apollo-setting";
 
 const inter = Inter({ subsets: ["latin"] });
 
