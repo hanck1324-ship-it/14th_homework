@@ -16,9 +16,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <ApolloSetting>
-        <body className={inter.className}>{children}</body>
-      </ApolloSetting>
+      <body className={inter.className}>
+        {/* 전역 Apollo Provider */}
+        <ApolloSetting>
+          {children}
+        </ApolloSetting>
+      </body>
     </html>
   );
 }
