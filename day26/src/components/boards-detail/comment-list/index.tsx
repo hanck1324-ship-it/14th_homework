@@ -4,11 +4,9 @@ import { useCommentList } from "./hook";
 import styles from "./styles.module.css";
 import Image from "next/image";
 import { Rate } from "antd";
-
-// ❗️실제 파일 이름에 맞게 import 경로를 수정합니다.
 import profileImage from "@/assets/profile_image.png";
 import editImage from "@/assets/pencil.png";
-import closeImage from "@/assets/trashbin.png"; // close.png -> trashbin.png
+import closeImage from "@/assets/trashbin.png";
 
 export default function CommentList() {
   const { data, loading } = useCommentList();
@@ -20,11 +18,11 @@ export default function CommentList() {
       <div className={styles.commentListContainer}>
         {data?.fetchBoardComments.map((comment, index) => (
           <div key={comment._id}>
-            {/* 👇 꼬여있던 div 구조를 올바르게 수정했습니다. */}
+       
             <div className={styles.listBody}>
               <div className={styles.listTitle}>
                 <div className={styles.forwardTitle}>
-                  {/* 👇 width와 height를 추가했습니다. */}
+               
                   <Image
                     src={profileImage}
                     alt="프로필이미지"
