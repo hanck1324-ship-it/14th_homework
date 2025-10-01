@@ -45,35 +45,29 @@
   
   .forwardTitleText {
     color: var(--gray-700, #5f5f5f);
-  
-    /* l_14_20 */
     font-family: "Pretendard Variable";
     font-size: 14px;
     font-style: normal;
     font-weight: 300;
-    line-height: 20px; /* 142.857% */
+    line-height: 20px; 
   }
   
   .commentText {
     color: var(--gray-800, #333);
-  
-    /* r_16_24 */
     font-family: "Pretendard Variable";
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: 24px; /* 150% */
+    line-height: 24px; 
   }
   
   .commentDate {
     color: #818181;
-  
-    /* r_14_20 */
     font-family: "Pretendard Variable";
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
-    line-height: 20px; /* 142.857% */
+    line-height: 20px; 
   }
   
   .border {

@@ -1,15 +1,20 @@
-
 import { gql } from "@apollo/client";
 
-export const FETCH_COMMENTS = gql`
-  query FetchBoardComments($page: Int, $boardId: ID!) {
-    fetchBoardComments(page: $page, boardId: $boardId) {
+// [요청서 1] 게시글 목록 조회 (Query)
+export const FETCH_BOARDS = gql`
+  query fetchBoards {
+    fetchBoards {
       _id
       writer
-      contents
-      rating
+      title
       createdAt
-      updatedAt
     }
+  }
+`;
+
+// [요청서 2] 게시글 삭제 (Mutation)
+export const DELETE_BOARD = gql`
+  mutation deleteBoard($boardId: ID!) {
+    deleteBoard(boardId: $boardId)
   }
 `;

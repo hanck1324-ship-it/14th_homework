@@ -1,10 +1,12 @@
 // src/components/boards-list/index.tsx
 "use client";
-import styles from "./styles.module.css"; // ❗️스타일 파일도 이 폴더로 옮겨와야 합니다.
-import Image from "next/image";
+import styles from "./styles.module.css";
 import { useBoardsList } from "./hook";
 import { IBoard } from "./types";
-import deleteImage from "@assets/trashbin.png"; // ❗️assets 경로를 확인해주세요.
+import deleteImage from "@/assets/trashbin.png"; 
+import profileImage from "@/assets/profile.png";
+import { Rate } from "antd";
+import Image from 'next/image';
 
 const IMAGE_SRC = {
   deleteImage: { src: deleteImage, alt: "삭제버튼" },

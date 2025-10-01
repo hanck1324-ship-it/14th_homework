@@ -4,7 +4,7 @@ import styles from "./styles.module.css";
 import Image from "next/image";
 import { useBoardWrite } from "./hook";
 import { IBoardWriteProps } from "./types";
-import addImage from "@assets/add_image.png";
+import addImage from "@/assets/add_image.png";
 
 
 const IMAGE_SRC = { addImage: { src: addImage, alt: "사진추가이미지" } };

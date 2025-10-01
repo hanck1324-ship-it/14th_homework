@@ -1,10 +1,13 @@
 "use client";
-import Boards from "components/board-lis"
+
+import BoardsList from "@/components/boards-list"
 
 export default function Boardspage() {
   return (
     <>
-    <BoarddList />
+  <BoardsList/>
+ 
     </>
-  );
-}
+
+  )
+};

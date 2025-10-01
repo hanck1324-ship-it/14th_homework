@@ -1,20 +1,18 @@
 import { useCommentList } from "./hook";
 import styles from "./styles.module.css";
 import Image from "next/image";
-import profileImage from "@assets/profile_image.png";
-import starsImage from "@assets/fivestars.png";
-import editImage from "@assets/edit.png";
-import closeImage from "@assets/close.png";
+import profileImage from "@/assets/profile_image.png";
+import editImage from "@/assets/pencil.png";
+import closeImage from "@/assets/close.png";
+import { Rate } from "antd";
+
 
 const IMAGE_SRC = {
   profileImage: {
     src: profileImage,
     alt: "프로필이미지",
   },
-  starsImage: {
-    src: starsImage,
-    alt: "평점이미지",
-  },
+  
   editImage: {
     src: editImage,
     alt: "편집버튼",
@@ -43,21 +41,12 @@ export default function CommentList() {
                   <div className={styles.forwardTitleText}>
                     {comment?.writer}
                   </div>
-                  <Image
-                    src={IMAGE_SRC.starsImage.src}
-                    alt={IMAGE_SRC.starsImage.alt}
-                  />
+
                 </div>
                 <div>
                   <div className={styles.backTitle}>
-                    <Image
-                      src={IMAGE_SRC.editImage.src}
-                      alt={IMAGE_SRC.editImage.alt}
-                    />
-                    <Image
-                      src={IMAGE_SRC.closeImage.src}
-                      alt={IMAGE_SRC.closeImage.alt}
-                    />
+                     
+                  <Rate disabled value={comment.rating} style={{ fontSize: 16 }} />
                   </div>
                 </div>
               </div>

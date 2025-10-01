@@ -7,7 +7,7 @@ const config: CodegenConfig = {
   schema: "https://main-practice.codebootcamp.co.kr/graphql",
 
   // 2. 요청서 스캔 경로
-  documents: ["src/components/**/*.ts", "!src/commons/graphql/**"],
+  documents: ["./src/components/**/*.{ts,tsx}"],
 
   generates: {
     // 3. 생성될 파일 경로 및 방식

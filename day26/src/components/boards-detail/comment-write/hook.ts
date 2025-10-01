@@ -1,15 +1,15 @@
 "use client";
 
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import {
-  CreateCommentDocument,
+  CreateBoardCommentDocument,
   FetchBoardCommentsDocument,
-  FetchBoardsDocument,
 } from "commons/graphql/graphql";
 import { useParams } from "next/navigation";
 import { useState, ChangeEvent } from "react";
+
 export const useCommentCreate = () => {
-  const [newComment] = useMutation(CreateCommentDocument);
+  const [newComment] = useMutation(CreateBoardCommentDocument);
   const [commentWriter, setCommentWriter] = useState("");
   const [commentPassword, setCommentPassword] = useState("");
   const [commentText, setCommentText] = useState("");
@@ -17,8 +17,7 @@ export const useCommentCreate = () => {
   const params = useParams();
   const id = params.boardId.toString();
 
-  //비밀번호는 없는것 가능함
-  const isButtonDisabled = !commentWriter || !commentText;
+  const isButtonDisabled = !commentWriter || !commentPassword || !commentText;
 
   const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
     setCommentWriter(event.target.value);
@@ -33,6 +32,11 @@ export const useCommentCreate = () => {
   };
 
   const createComment = async () => {
+    if (isButtonDisabled) {
+      alert("작성자, 비밀번호, 내용을 모두 입력해주세요.");
+      return;
+    }
+
     try {
       const { data } = await newComment({
         variables: {
@@ -40,7 +44,6 @@ export const useCommentCreate = () => {
             writer: commentWriter,
             password: commentPassword,
             contents: commentText,
-            // TODO - 추후 하드코딩 내용 변경 예정.
             rating: 0.0,
           },
           boardId: id,
@@ -48,15 +51,13 @@ export const useCommentCreate = () => {
         refetchQueries: [
           {
             query: FetchBoardCommentsDocument,
-            // page 번호 하드코딩 됨
-            variables: { page: 1, boardId: id },
+            variables: { boardId: id },
           },
         ],
       });
-      console.log("data", data);
+
       if (data?.createBoardComment) {
         alert("댓글 등록이 완료 되었습니다!");
-        // 댓글이 등록된 후, 댓글입력창을 모두 초기화 합니다.
         setCommentText("");
         setCommentWriter("");
         setCommentPassword("");
@@ -65,19 +66,18 @@ export const useCommentCreate = () => {
       }
     } catch (err) {
       console.error(err);
+      alert("댓글 등록 중 오류가 발생했습니다.");
     }
   };
+
   return {
     isButtonDisabled,
     onChangePW,
     onChangeText,
     onChangeWriter,
     commentWriter,
-    setCommentWriter,
     commentPassword,
-    setCommentPassword,
     commentText,
-    setCommentText,
     createComment,
   };
 };
