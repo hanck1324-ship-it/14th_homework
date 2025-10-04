@@ -1,32 +1,45 @@
 "use client";
+
 import React from "react";
 import styles from "./styles.module.css";
 import Image from "next/image";
 import { useBoardWrite } from "./hook";
 import { IBoardWriteProps } from "./types";
 import addImage from "@/assets/add_image.png";
-
+import { Modal } from "antd";
+import DaumPostcodeEmbed from "react-daum-postcode";
 
 const IMAGE_SRC = { addImage: { src: addImage, alt: "사진추가이미지" } };
+
 export default function BoardWritePage(props: IBoardWriteProps) {
   const { isEdit } = props;
 
   const {
-    name,
-    data,
-    nameError,
+    writer,
+    wirterError,
+    onChangeWriter,
     password,
     passwordError,
+    onChangePassword,
     title,
     titleError,
-    content,
-    contentError,
-    isButtonDisabled,
-    onChangeName,
-    onChangePassword,
     onChangeTitle,
-    onChangeContent,
-    onClickSignup,
+    contents,
+    contentsError,
+    onChangeContents,
+    onClickSubmit
+    onClickUpdate,
+    isActive,
+    data.
+    zipcode,
+    adress,
+    adressDEtail,
+    youtubeUrl,
+    isModalOpen,
+    onChantgeYoutubeUrl,
+    handleToggleModal,
+    handleComplete
+
   } = useBoardWrite(isEdit);
 
   return (

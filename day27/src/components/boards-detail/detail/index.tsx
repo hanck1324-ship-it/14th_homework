@@ -7,14 +7,18 @@ import styles from "./styles.module.css";
 import { useBoardDetail } from "./hook";
 
 // 이미지 import
-import profileImage from "@/assets/profile_image.png";
-import linkImage from "@/assets/link.png";
-import locationImage from "@/assets/location.png";
+
+
 import heartImage from "@/assets/heart.png";
-import brokenheartImage from "@/assets/brokenheart.png";
+import brokenHeartImage from "@/assets/brokenheart.png";
+import locationImage from "@/assets/location.png";
+import clipImage from "@/assets/clip.png";
+import profileImage from "@/assets/profile_image.png";
 import pencilImage from "@/assets/pencil.png";
 import listImage from "@/assets/spinningtop.png";
-import contentImage from "@/assets/beauty.png";
+import linkImage from "@/assets/link.png"
+import contentImage from "@/assets/openthesea.png"
+import brokenheartImage from "@/assets/brokenheart.png";
 
 export default function BoardsDetail() {
   const router = useRouter();
