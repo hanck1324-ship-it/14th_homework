@@ -5,7 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import styles from "./styles.module.css";
 import { useBoardDetail } from "./hook";
-
+import ReactPlayer from 'react-player/youtube'; 
 // 이미지 import
 
 
@@ -18,7 +18,6 @@ import pencilImage from "@/assets/pencil.png";
 import listImage from "@/assets/spinningtop.png";
 import linkImage from "@/assets/link.png"
 import contentImage from "@/assets/openthesea.png"
-import brokenheartImage from "@/assets/brokenheart.png";
 
 export default function BoardsDetail() {
   const router = useRouter();
@@ -64,7 +63,7 @@ export default function BoardsDetail() {
               <iframe
                 width="560"
                 height="315"
-                src={`https://www.youtube.com/embed/6KcVHc48hs7iIix2`}
+                src={`https://www.youtube.com/embed/${board.youtubeUrl.split("=")[1]}`}
                 title="YouTube video player"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
