@@ -15,30 +15,30 @@ export default function BoardWritePage(props: IBoardWriteProps) {
   const { isEdit } = props;
 
   const {
-    writer,
-    wirterError,
-    onChangeWriter,
+    writer,         
+    writerError,     
+    onChangeWriter,  
     password,
     passwordError,
-    onChangePassword,
+    onChangePassword, 
     title,
     titleError,
     onChangeTitle,
-    contents,
-    contentsError,
-    onChangeContents,
-    onClickSubmit
+    contents,       
+    contentsError,   
+    onChangeContents, 
+    onClickSubmit,  
     onClickUpdate,
-    isActive,
-    data.
+    isActive,      
     zipcode,
-    adress,
-    adressDEtail,
+    address,
+    addressDetail, 
     youtubeUrl,
     isModalOpen,
-    onChantgeYoutubeUrl,
+    onChangeAddressDetail,
+    onChangeYoutubeUrl,
     handleToggleModal,
-    handleComplete
+    handleComplete,
 
   } = useBoardWrite(isEdit);
 
@@ -63,7 +63,7 @@ export default function BoardWritePage(props: IBoardWriteProps) {
                 type="text"
                 placeholder="작성자 명을 입력해 주세요."
                 className={isEdit ? styles.disabled_input : styles.enroll_input}
-                onChange={onChangeName}
+                onChange={onChangeWriter}
               />
               <div className={styles.error_msg}>{nameError}</div>
             </div>
@@ -171,7 +171,7 @@ export default function BoardWritePage(props: IBoardWriteProps) {
               ? `${styles.enroll_submit_button} ${styles.disabled}`
               : styles.enroll_submit_button
           }
-          onClick={onClickSignup}
+          onClick={isEdit ? onClickUpdate : onClickSubmit}}
           disabled={!isEdit && isButtonDisabled}
         >
           {isEdit ? "수정" : "등록"}하기
