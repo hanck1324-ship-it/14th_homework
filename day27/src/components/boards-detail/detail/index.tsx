@@ -1,16 +1,14 @@
-// src/components/boards-detail/index.tsx
 "use client";
 
 import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import styles from "./styles.module.css";
 import { useBoardDetail } from "./hook";
-import ReactPlayer from 'react-player/youtube'; 
-// 이미지 import
+import ReactPlayer from 'react-player/youtube'; // 😎 유튜브 플레이어 import
+import { LikeOutlined, DislikeOutlined } from '@ant-design/icons'; // 😎 antd 아이콘 import
+import { Tooltip } from 'antd'; // 😎 antd 툴팁 import
 
-
-import heartImage from "@/assets/heart.png";
-import brokenHeartImage from "@/assets/brokenheart.png";
+// --- 이미지 import (경로 확인 필수!) ---
 import locationImage from "@/assets/location.png";
 import clipImage from "@/assets/clip.png";
 import profileImage from "@/assets/profile_image.png";
@@ -22,12 +20,14 @@ import contentImage from "@/assets/openthesea.png"
 export default function BoardsDetail() {
   const router = useRouter();
   const params = useParams();
-  const boardId = params.boardId;
+  const boardId = params.boardId as string;
 
   const { board, loading } = useBoardDetail(boardId);
 
-  if (loading) {return <div>게시글을 불러오는 중입니다...</div>};
-      console.log("게시글 상세 데이터:", board);
+  if (loading) { return <div>게시글을 불러오는 중입니다...</div>; }
+
+  // 주소 정보를 하나의 문자열로 합치기
+  const fullAddress = `${board?.boardAddress?.zipcode || ''} ${board?.boardAddress?.address || ''} ${board?.boardAddress?.addressDetail || ''}`.trim();
 
   return (
     <div className={styles.detailLayout}>
@@ -37,68 +37,61 @@ export default function BoardsDetail() {
           <div className={styles.detailMetadataContainer}>
             <div className={styles.detailMetadataProfile}>
               <Image src={profileImage} alt="프로필이미지" width={40} height={40} />
-              <div>{board?.writer}</div>
+              <div>
+                <div>{board?.writer}</div>
+                <div className={styles.detailMetadataDate}>
+                  {board?.createdAt?.split("T")[0]}
+                </div>
+              </div>
             </div>
-            <div className={styles.detailMetadataDate}>
-              {board?.createdAt.split("T")[0]}
+            <div className={styles.detailMetadataIconContainer}>
+              <Image src={clipImage} alt="클립아이콘" />
+              {/* 😎툴팁 기능 추가 */}
+              <Tooltip title={fullAddress}>
+                <Image src={locationImage} alt="위치아이콘" />
+              </Tooltip>
             </div>
-          </div>
-
-          <div className={styles.enrollBorder}></div>
-
-          <div className={styles.detailMetadataIconContainer}>
-            <Image src={linkImage} alt="링크아이콘" width={24} height={24} />
-            <Image src={locationImage} alt="위치아이콘" />
           </div>
 
           <div className={styles.detailContentContainer}>
-            {/* 게시글 이미지 */}
-            <Image src={contentImage} alt="게시글 이미지" width={40} height={60} className={styles.detailContentImage} />
-
-            {/* 본문 */}
             <div className={styles.detailContentText}>{board?.contents}</div>
-
-            {/* 유튜브 영상 */}
-            <div className={styles.detailYoutubeWrapper}>
-              <iframe
-                width="560"
-                height="315"
-                src={`https://www.youtube.com/embed/${board.youtubeUrl.split("=")[1]}`}
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
-            </div>
-
-            {/* 좋아요 / 싫어요 */}
+            
+            {/* 😎 ReactPlayer로 유튜브 영상 처리 */}
+            {board?.youtubeUrl && (
+              <div className={styles.detailYoutubeWrapper}>
+                <ReactPlayer
+                  url={board.youtubeUrl}
+                  width="486px"
+                  height="240px"
+                  controls={true}
+                />
+              </div>
+            )}
+            
+            {/* 😎 antd 아이콘으로 좋아요/싫어요 교체 */}
             <div className={styles.detailContentGoodOrBad}>
               <div className={styles.detailGoodContainer}>
-                <Image src={heartImage} alt="좋아요" />
+                <LikeOutlined style={{ fontSize: '24px', color: '#FFD600' }} />
                 <div className={styles.detailGoodText}>{board?.likeCount}</div>
               </div>
               <div className={styles.detailGoodContainer}>
-                <Image src={brokenheartImage} alt="싫어요" />
+                <DislikeOutlined style={{ fontSize: '24px', color: '#828282' }} />
                 <div className={styles.detailBadText}>{board?.dislikeCount}</div>
               </div>
             </div>
-
-            {/* 버튼 */}
-            <div className={styles.detailButtonsContainer}>
-              <button className={styles.detailButton} onClick={() => router.push('/boards')}>
-                <Image src={listImage} alt="목록아이콘" />
-                <div>목록으로</div>
-              </button>
-              <button className={styles.detailButton} onClick={() => router.push(`/boards/${boardId}/edit`)}>
-                <Image src={pencilImage} alt="수정아이콘" />
-                <div>수정하기</div>
-              </button>
-            </div>
-
           </div>
+        </div>
+
+        {/* 버튼 */}
+        <div className={styles.detailButtonsContainer}>
+          <button className={styles.detailButton} onClick={() => router.push('/boards')}>
+            목록으로
+          </button>
+          <button className={styles.detailButton} onClick={() => router.push(`/boards/${boardId}/edit`)}>
+            수정하기
+          </button>
         </div>
       </div>
     </div>
   );
 }
-

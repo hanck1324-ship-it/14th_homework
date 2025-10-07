@@ -1,12 +1,11 @@
-// src/components/boards-write/hook.ts
-
 "use client";
 
 import { useState, ChangeEvent, useEffect } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { useRouter, useParams } from "next/navigation";
-import { CREATE_BOARD, UPDATE_BOARD, FETCH_BOARD } from "./queries";
-import { IUpdateBoardInput } from "@/commons/graphql/graphql";
+import { IUpdateBoardInput, CreateBoardDocument, UpdateBoardDocument, FetchBoardDocument, } from "@/commons/graphql/graphql";
+
+
 
 export const useBoardWrite = (isEdit: boolean) => {
   const router = useRouter();
@@ -17,15 +16,15 @@ export const useBoardWrite = (isEdit: boolean) => {
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
-  const [youtubeUrl, setYoutubeUrl] = useState(""); //  🤩유튜브 주소 상태
+  const [youtubeUrl, setYoutubeUrl] = useState(""); 
   const [zipcode, setZipcode] = useState("");
   const [address, setAddress] = useState("");
   const [addressDetail, setAddressDetail] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   
-  const [createBoard] = useMutation(CREATE_BOARD);
-  const [updateBoard] = useMutation(UPDATE_BOARD);
-  const { data } = useQuery(FETCH_BOARD, { variables: { boardId }, skip: !isEdit });
+  const [createBoard] = useMutation(CreateBoardDocument);
+  const [updateBoard] = useMutation(UpdateBoardDocument);
+  const { data } = useQuery(FetchBoardDocument, { variables: { boardId }, skip: !isEdit });
 
   const onChangeWriter = (e: ChangeEvent<HTMLInputElement>) => setWriter(e.target.value);
   const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value);
@@ -63,9 +62,10 @@ export const useBoardWrite = (isEdit: boolean) => {
     try {
       await updateBoard({
         variables: {
+          
           boardId,
           password,
-          updateBoardInput, // 😇 youtubeUrl이 담긴 객체를 서버로 전송
+          updateBoardInput, 
         },
       });
       alert("게시글이 성공적으로 수정되었습니다.");
@@ -80,7 +80,7 @@ export const useBoardWrite = (isEdit: boolean) => {
       setWriter(data.fetchBoard.writer ?? "");
       setTitle(data.fetchBoard.title);
       setContents(data.fetchBoard.contents);
-      setYoutubeUrl(data.fetchBoard.youtubeUrl ?? ""); // 👈 기존 유튜브 주소 불러오기
+      setYoutubeUrl(data.fetchBoard.youtubeUrl ?? ""); 
       setZipcode(data.fetchBoard.boardAddress?.zipcode ?? "");
       setAddress(data.fetchBoard.boardAddress?.address ?? "");
       setAddressDetail(data.fetchBoard.boardAddress?.addressDetail ?? "");
