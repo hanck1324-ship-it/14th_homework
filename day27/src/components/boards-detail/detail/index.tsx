@@ -8,7 +8,7 @@ import ReactPlayer from 'react-player/youtube'; // 😎 유튜브 플레이어 i
 import { LikeOutlined, DislikeOutlined } from '@ant-design/icons'; // 😎 antd 아이콘 import
 import { Tooltip } from 'antd'; // 😎 antd 툴팁 import
 
-// --- 이미지 import (경로 확인 필수!) ---
+
 import locationImage from "@/assets/location.png";
 import clipImage from "@/assets/clip.png";
 import profileImage from "@/assets/profile_image.png";
@@ -25,6 +25,7 @@ export default function BoardsDetail() {
   const { board, loading } = useBoardDetail(boardId);
 
   if (loading) { return <div>게시글을 불러오는 중입니다...</div>; }
+
 
   // 주소 정보를 하나의 문자열로 합치기
   const fullAddress = `${board?.boardAddress?.zipcode || ''} ${board?.boardAddress?.address || ''} ${board?.boardAddress?.addressDetail || ''}`.trim();
@@ -46,7 +47,6 @@ export default function BoardsDetail() {
             </div>
             <div className={styles.detailMetadataIconContainer}>
               <Image src={clipImage} alt="클립아이콘" />
-              {/* 😎툴팁 기능 추가 */}
               <Tooltip title={fullAddress}>
                 <Image src={locationImage} alt="위치아이콘" />
               </Tooltip>
@@ -55,8 +55,6 @@ export default function BoardsDetail() {
 
           <div className={styles.detailContentContainer}>
             <div className={styles.detailContentText}>{board?.contents}</div>
-            
-            {/* 😎 ReactPlayer로 유튜브 영상 처리 */}
             {board?.youtubeUrl && (
               <div className={styles.detailYoutubeWrapper}>
                 <ReactPlayer

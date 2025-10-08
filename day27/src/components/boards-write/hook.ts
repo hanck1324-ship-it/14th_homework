@@ -6,7 +6,7 @@ import { useState, ChangeEvent, useEffect } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { useRouter, useParams } from "next/navigation";
 import { CREATE_BOARD, UPDATE_BOARD, FETCH_BOARD } from "./queries";
-import { IUpdateBoardInput } from "@/commons/graphql/graphql";
+import { IUpdateBoardInput, CreateBoardDocument, UpdateBoardDocument, FetchBoardDocument } from "@/commons/graphql/graphql";
 
 export const useBoardWrite = (isEdit: boolean) => {
   const router = useRouter();
@@ -17,21 +17,21 @@ export const useBoardWrite = (isEdit: boolean) => {
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
-  const [youtubeUrl, setYoutubeUrl] = useState(""); // 👈 유튜브 주소 상태
+  const [youtubeUrl, setYoutubeUrl] = useState(""); //  유튜브 주소 상태
   const [zipcode, setZipcode] = useState("");
   const [address, setAddress] = useState("");
   const [addressDetail, setAddressDetail] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   
-  const [createBoard] = useMutation(CREATE_BOARD);
-  const [updateBoard] = useMutation(UPDATE_BOARD);
-  const { data } = useQuery(FETCH_BOARD, { variables: { boardId }, skip: !isEdit });
+  const [createBoard] = useMutation(CreateBoardDocument);
+  const [updateBoard] = useMutation(UpdateBoardDocument);
+  const { data } = useQuery(FetchBoardDocument, { variables: { boardId }, skip: !isEdit });
 
   const onChangeWriter = (e: ChangeEvent<HTMLInputElement>) => setWriter(e.target.value);
   const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value);
   const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => setTitle(e.target.value);
   const onChangeContents = (e: ChangeEvent<HTMLTextAreaElement>) => setContents(e.target.value);
-  const onChangeYoutubeUrl = (e: ChangeEvent<HTMLInputElement>) => setYoutubeUrl(e.target.value); // 👈 유튜브 주소 핸들러
+  const onChangeYoutubeUrl = (e: ChangeEvent<HTMLInputElement>) => setYoutubeUrl(e.target.value); 
   const onChangeAddressDetail = (e: ChangeEvent<HTMLInputElement>) => setAddressDetail(e.target.value);
   
   const handleToggleModal = () => setIsModalOpen((prev) => !prev);

@@ -3,7 +3,7 @@
 import React from "react";
 import styles from "./styles.module.css";
 import Image from "next/image";
-import { useBoardWrite } from "./hook"; 
+import { useBoardWrite } from "./hook";
 import { IBoardWriteProps } from "./types";
 import addImage from "@/assets/add_image.png";
 import { Modal } from "antd";
@@ -23,7 +23,7 @@ export default function BoardWritePage(props: IBoardWriteProps) {
     isActive, data,
     zipcode, address, addressDetail, youtubeUrl, isModalOpen,
     onChangeAddressDetail, onChangeYoutubeUrl, handleToggleModal, handleComplete,
-  } = useBoardWrite (isEdit);
+  } = useBoardWrite(isEdit);
 
   return (
     <div className={styles.layout}>
