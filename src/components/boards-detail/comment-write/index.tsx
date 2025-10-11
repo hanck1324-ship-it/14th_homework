@@ -3,11 +3,11 @@
 import React from "react";
 import styles from "./styles.module.css";
 import Image from "next/image";
-import { useCommentWrite } from "./hook"; // hook 이름 변경
+import { useCommentWrite } from "./hook";
 import { Rate } from "antd";
 import commentIcon from "@/assets/chat.png";
 
-export default function CommentWrite() { // 컴포넌트 이름 변경
+export default function CommentWrite() {
   const {
     writer,
     password,
@@ -18,51 +18,58 @@ export default function CommentWrite() { // 컴포넌트 이름 변경
     onChangeContents,
     onChangeRating,
     onClickSubmit,
-  } = useCommentWrite(); // hook 이름 변경
+  } = useCommentWrite();
 
   return (
-    <div className={styles.layout}>
-      <div className={styles.comment_title_container}>
+    <div className={styles.commentBodyArea}>
+      <div className={styles.title}>
         <Image src={commentIcon} alt="댓글 아이콘" width={24} height={24} />
-        <span className={styles.comment_title_text}>댓글</span>
+        <span>댓글</span>
       </div>
-      <div className={styles.comment_input_container}>
-        <div className={styles.comment_input_metadata}>
-          <input
-            type="text"
-            placeholder="작성자"
-            className={styles.comment_input}
-            value={writer}
-            onChange={onChangeWriter}
-          />
-          <input
-            type="password"
-            placeholder="비밀번호"
-            className={styles.comment_input}
-            value={password}
-            onChange={onChangePassword}
-          />
-          <Rate onChange={onChangeRating} value={rating} /> {/* 별점 컴포넌트 */}
-        </div>
-        <div className={styles.comment_textarea_container}>
-          <textarea
-            placeholder="개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다."
-            className={`${styles.comment_input} ${styles.comment_textarea}`}
-            value={contents}
-            onChange={onChangeContents}
-            maxLength={100}
-          ></textarea>
-          <div className={styles.comment_submit_wrapper}>
-            <div className={styles.comment_textarea_count}>
-              {contents.length}/100
-            </div>
-            <button
-              className={styles.comment_submit_button}
-              onClick={onClickSubmit}
-            >
-              등록하기
-            </button>
+
+      {/* 수정 전: 별점(Rate) 컴포넌트가 작성자/비밀번호와 같은 줄에 있었음.
+        수정 후: 이미지와 동일하게 별점 컴포넌트를 작성자/비밀번호 입력창 위로 이동함.
+      */}
+      <Rate onChange={onChangeRating} value={rating} />
+
+      {/* 수정 전: 별점 컴포넌트가 이 div 안에 함께 있었음.
+        수정 후: 작성자와 비밀번호 입력창만 남겨 가로 정렬을 유지함.
+      */}
+      <div className={styles.commentKeyArea}>
+        <input
+          type="text"
+          placeholder="작성자"
+          className={styles.writerInput}
+          value={writer}
+          onChange={onChangeWriter}
+        />
+        <input
+          type="password"
+          placeholder="비밀번호"
+          className={styles.writerInput}
+          value={password}
+          onChange={onChangePassword}
+        />
+      </div>
+
+      <div className={styles.commentInputBody}>
+        <textarea
+          placeholder="내용을 입력해주세요."
+          className={styles.commentInput}
+          value={contents}
+          onChange={onChangeContents}
+          maxLength={100}
+        ></textarea>
+        <div className={styles.buttonBody}>
+          <div className={styles.inputTextCount}>
+            {contents.length}/100
           </div>
+          <button
+            className={styles.commentEnrollButton}
+            onClick={onClickSubmit}
+          >
+            등록하기
+          </button>
         </div>
       </div>
     </div>
