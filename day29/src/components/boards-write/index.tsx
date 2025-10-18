@@ -124,7 +124,7 @@ export default function BoardWritePage(props: IBoardWriteProps) {
                 type="text"
                 className={styles.zipcode_input}
                 placeholder="12345"
-                readOnly
+                readOnly 
                 value={zipcode}
               />
               <button className={styles.zipcode_search_button} onClick={handleTogglePostcodeModal}>
@@ -164,9 +164,9 @@ export default function BoardWritePage(props: IBoardWriteProps) {
           <div className={styles.enroll_row_section}>
             <div>사진 첨부</div>
             <div className={styles.picture_enroll_row}>
-              <Image src={IMAGE_SRC.addImage.src} alt="이미지추가" />
-              <Image src={IMAGE_SRC.addImage.src} alt="이미지추가" />
-              <Image src={IMAGE_SRC.addImage.src} alt="이미지추가" />
+              <Image src={IMAGE_SRC.addImage.src} alt="이미지추가" width={100} height={100} />
+              <Image src={IMAGE_SRC.addImage.src} alt="이미지추가" width={100} height={100} />
+              <Image src={IMAGE_SRC.addImage.src} alt="이미지추가" width={100} height={100} />
             </div>
           </div>
         </div>
