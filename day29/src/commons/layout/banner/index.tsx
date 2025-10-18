@@ -31,19 +31,12 @@ export default function Banner() {
           <SwiperSlide key={index}>
             <Image
               src={src}
-              alt={`Banner ${index + 1}`}
-              layout="fill"
-              objectFit="cover"
+              alt={`배너 이미지 ${index + 1}`}
+              fill
+              style={{ objectFit: 'cover' }}
               className={styles.bannerImage}
+              priority={index === 0} // 첫 번째 이미지는 우선 로딩
             />
- {/* 최신방식
-<Image
-  src={src}
-  alt={`Banner ${index + 1}`}
-  fill // layout="fill" 대신 사용
-  style={{ objectFit: 'cover' }} // objectFit을 style 객체 안으로 이동
-  className={styles.bannerImage}
-/> */}
           </SwiperSlide>
         ))}
       </Swiper>

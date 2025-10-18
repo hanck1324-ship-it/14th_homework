@@ -2,13 +2,34 @@
 
 .bannerBody {
     width: 100%; 
-    height: 516px;
+    height: 400px; /* 516px → 400px로 축소 */
     margin-bottom: 40px;
+    max-width: 1920px; /* 최대 너비 제한 */
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  /* 모바일 반응형 */
+  @media (max-width: 768px) {
+    .bannerBody {
+      height: 300px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .bannerBody {
+      height: 200px;
+    }
   }
   
   .mySwiper {
     width: 100%;
     height: 100%;
+  }
+  
+  /* Swiper 슬라이드에 position relative 추가 (fill 속성을 위해 필요) */
+  .mySwiper :global(.swiper-slide) {
+    position: relative;
   }
   
   .bannerImage {
