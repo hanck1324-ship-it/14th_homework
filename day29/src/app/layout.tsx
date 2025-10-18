@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import ApolloSetting from "@/commons/settings/apollo-setting";
+import Navigation from "@/commons/layout/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,6 +20,7 @@ export default function RootLayout({
       <body className={inter.className}>
         {/* 전역 Apollo Provider */}
         <ApolloSetting>
+          <Navigation />
           {children}
         </ApolloSetting>
       </body>
