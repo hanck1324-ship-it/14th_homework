@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useParams } from "next/navigation";
 import { CREATE_BOARD_COMMENT } from "./queries";
-import { FETCH_BOARD_COMMENTS } from "../comment-list/queries";
+import { FetchBoardCommentsDocument } from "@/commons/graphql/graphql";
 
 export const useCommentWrite = () => {
   const params = useParams();
@@ -52,7 +52,7 @@ export const useCommentWrite = () => {
         },
         refetchQueries: [
           {
-            query: FETCH_BOARD_COMMENTS,
+            query: FetchBoardCommentsDocument,
             variables: { boardId },
           },
         ],

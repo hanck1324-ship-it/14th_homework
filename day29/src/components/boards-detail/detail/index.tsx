@@ -4,18 +4,14 @@ import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import styles from "./styles.module.css";
 import { useBoardDetail } from "./hook";
-import ReactPlayer from 'react-player'; // ✅ 이렇게 수정해주세요!
-import { LikeOutlined, DislikeOutlined } from '@ant-design/icons'; // 😎 antd 아이콘 import
-import { Tooltip } from 'antd'; // 😎 antd 툴팁 import
-
+import dynamic from 'next/dynamic';
+const ReactPlayer = dynamic(() => import('react-player'), { ssr: false });
+import { LikeOutlined, DislikeOutlined } from '@ant-design/icons';
+import { Tooltip } from 'antd'; 
 
 import locationImage from "@/assets/location.png";
 import clipImage from "@/assets/clip.png";
 import profileImage from "@/assets/profile_image.png";
-import pencilImage from "@/assets/pencil.png";
-import listImage from "@/assets/spinningtop.png";
-import linkImage from "@/assets/link.png"
-import contentImage from "@/assets/openthesea.png"
 
 export default function BoardsDetail() {
   const router = useRouter();
@@ -26,8 +22,6 @@ export default function BoardsDetail() {
 
   if (loading) { return <div>게시글을 불러오는 중입니다...</div>; }
 
-
-  // 주소 정보를 하나의 문자열로 합치기
   const fullAddress = `${board?.boardAddress?.zipcode || ''} ${board?.boardAddress?.address || ''} ${board?.boardAddress?.addressDetail || ''}`.trim();
 
   return (
@@ -35,22 +29,22 @@ export default function BoardsDetail() {
       <div className={styles.detailBody}>
         <div className={styles.detailFrame}>
           <div className={styles.detailSubject}>{board?.title}</div>
+          
           <div className={styles.detailMetadataContainer}>
             <div className={styles.detailMetadataProfile}>
               <Image src={profileImage} alt="프로필이미지" width={40} height={40} />
-              <div>
-                <div>{board?.writer}</div>
-                <div className={styles.detailMetadataDate}>
-                  {board?.createdAt?.split("T")[0]}
-                </div>
-              </div>
+              <div>{board?.writer}</div>
             </div>
-            <div className={styles.detailMetadataIconContainer}>
-              <Image src={clipImage} alt="클립아이콘" />
-              <Tooltip title={fullAddress}>
-                <Image src={locationImage} alt="위치아이콘" />
-              </Tooltip>
+            <div className={styles.detailMetadataDate}>
+              {board?.createdAt?.split("T")[0]}
             </div>
+          </div>
+
+          <div className={styles.detailMetadataIconContainer}>
+            <Image src={clipImage} alt="클립아이콘" />
+            <Tooltip title={fullAddress}>
+              <Image src={locationImage} alt="위치아이콘" />
+            </Tooltip>
           </div>
 
           <div className={styles.detailContentContainer}>
@@ -66,7 +60,6 @@ export default function BoardsDetail() {
               </div>
             )}
             
-            {/* 😎 antd 아이콘으로 좋아요/싫어요 교체 */}
             <div className={styles.detailContentGoodOrBad}>
               <div className={styles.detailGoodContainer}>
                 <LikeOutlined style={{ fontSize: '24px', color: '#FFD600' }} />
@@ -80,7 +73,6 @@ export default function BoardsDetail() {
           </div>
         </div>
 
-        {/* 버튼 */}
         <div className={styles.detailButtonsContainer}>
           <button className={styles.detailButton} onClick={() => router.push('/boards')}>
             목록으로

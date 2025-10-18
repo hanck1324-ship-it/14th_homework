@@ -1,0 +1,30 @@
+
+
+/*수업과의 일관성: 강사님의 코드와 앞으로의 수업 내용이 대부분 CSS Modules 방식을 기반으로 진행될 가능성이 높습니다. 흐름을 따라가는 것이 학습에 훨씬 효율적이에요.
+
+기초 다지기: 초보 단계에서는 순수한 CSS 실력을 탄탄하게 다지는 것이 정말 중요합니다. CSS Modules 방식은 이 과정에 가장 큰 도움이 됩니다.
+
+프로젝트의 통일성: 이미 프로젝트의 많은 컴포넌트들이 styles.module.css 파일을 사용하고 있기 때문에, 한 가지 방식으로 통일하는 것이 코드를 더 깔끔하게 유지하는 비결입니다. */
+
+
+/* Day29 요구사항*/
+
+/* 1. 폰트 등록하기 */
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('/fonts/Pretendard-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* 2. 모든 태그 스타일 초기화하기 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 3. 기본 폰트 지정하기 */
+body {
+  font-family: 'Pretendard-Regular', sans-serif;
+}

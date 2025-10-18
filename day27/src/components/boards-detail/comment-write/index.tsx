@@ -3,172 +3,67 @@
 import React from "react";
 import styles from "./styles.module.css";
 import Image from "next/image";
-import { useBoardWrite } from "./hook";
-import { IBoardWriteProps } from "./types";
-import addImage from "@/assets/add_image.png";
-import { Modal } from "antd";
-import DaumPostcodeEmbed from "react-daum-postcode";
+import { useCommentWrite } from "./hook"; // hook 이름 변경
+import { Rate } from "antd";
+import commentIcon from "@/assets/chat.png";
 
-const IMAGE_SRC = { addImage: { src: addImage, alt: "사진추가이미지" } };
-
-export default function BoardWritePage(props: IBoardWriteProps) {
-  const { isEdit } = props;
+export default function CommentWrite() { // 컴포넌트 이름 변경
   const {
-    writer, writerError, onChangeWriter,
-    password, passwordError, onChangePassword,
-    title, titleError, onChangeTitle,
-    contents, contentsError, onChangeContents,
-    onClickSubmit, onClickUpdate,
-    isActive, data,
-    zipcode, address, addressDetail, youtubeUrl, isModalOpen,
-    onChangeAddressDetail, onChangeYoutubeUrl, handleToggleModal, handleComplete,
-  } = useBoardWrite(isEdit);
+    writer,
+    password,
+    contents,
+    rating,
+    onChangeWriter,
+    onChangePassword,
+    onChangeContents,
+    onChangeRating,
+    onClickSubmit,
+  } = useCommentWrite(); // hook 이름 변경
 
   return (
     <div className={styles.layout}>
-      {isModalOpen && (
-        <Modal title="우편번호 검색" open={true} onCancel={handleToggleModal} footer={null}>
-          <DaumPostcodeEmbed onComplete={handleComplete} />
-        </Modal>
-      )}
-
-      <div className={styles.enroll_subject}>
-        <div className={styles.enroll_subject_text}>
-          {isEdit ? "게시물 수정" : "게시물 등록"}
-        </div>
+      <div className={styles.comment_title_container}>
+        <Image src={commentIcon} alt="댓글 아이콘" width={24} height={24} />
+        <span className={styles.comment_title_text}>댓글</span>
       </div>
-      <div className={styles.enroll_row_container}>
-        <div className={styles.enroll_row_section}>
-          <div className={styles.enroll_row_flex}>
-            <div className={styles.flex_half}>
-              <div className={styles.enroll_form_title}>
-                <div>작성자</div>
-                <div className={styles.enroll_required_indicator}> *</div>
-              </div>
-              <input
-                readOnly={isEdit}
-                defaultValue={isEdit ? data?.fetchBoard?.writer : writer}
-                type="text"
-                placeholder="작성자 명을 입력해 주세요."
-                className={isEdit ? styles.disabled_input : styles.enroll_input}
-                onChange={onChangeWriter}
-              />
-              <div className={styles.error_msg}>{writerError}</div>
-            </div>
-            <div className={styles.flex_half}>
-              <div className={styles.enroll_form_title}>
-                <div>비밀번호</div>
-                <div className={styles.enroll_required_indicator}> *</div>
-              </div>
-              <input
-                type="password"
-                placeholder="비밀번호를 입력해 주세요."
-                className={styles.enroll_input}
-                onChange={onChangePassword}
-              />
-              <div className={styles.error_msg}>{passwordError}</div>
-            </div>
-          </div>
-        </div>
-
-        <div className={styles.enroll_border}></div>
-
-        <div className={styles.enroll_row_section}>
-          <div className={styles.enroll_form_title}>
-            <div>제목</div>
-            <div className={styles.enroll_required_indicator}> *</div>
-          </div>
+      <div className={styles.comment_input_container}>
+        <div className={styles.comment_input_metadata}>
           <input
-            defaultValue={isEdit ? data?.fetchBoard?.title : title}
             type="text"
-            className={styles.enroll_input}
-            placeholder="제목을 입력해 주세요."
-            onChange={onChangeTitle}
+            placeholder="작성자"
+            className={styles.comment_input}
+            value={writer}
+            onChange={onChangeWriter}
           />
-          <div className={styles.error_msg}>{titleError}</div>
+          <input
+            type="password"
+            placeholder="비밀번호"
+            className={styles.comment_input}
+            value={password}
+            onChange={onChangePassword}
+          />
+          <Rate onChange={onChangeRating} value={rating} /> {/* 별점 컴포넌트 */}
         </div>
-        <div className={styles.enroll_border}></div>
-        <div className={styles.enroll_row_section}>
-          <div className={styles.enroll_form_title}>
-            <div>내용</div>
-            <div className={styles.enroll_required_indicator}> *</div>
-          </div>
+        <div className={styles.comment_textarea_container}>
           <textarea
-            defaultValue={isEdit ? data?.fetchBoard?.contents : contents}
-            placeholder="내용을 입력해 주세요."
-            className={`${styles.enroll_input} ${styles.enroll_textarea}`}
+            placeholder="개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다."
+            className={`${styles.comment_input} ${styles.comment_textarea}`}
+            value={contents}
             onChange={onChangeContents}
+            maxLength={100}
           ></textarea>
-          <div className={styles.error_msg}>{contentsError}</div>
-        </div>
-        <div className={styles.enroll_row_section}>
-          <div className={styles.enroll_form_title}>
-            <div>주소</div>
-          </div>
-          <div className={styles.enroll_address_firstrow}>
-            <input
-              type="text"
-              className={styles.zipcode_input}
-              placeholder="12345"
-              readOnly
-              value={zipcode}
-            />
-            <button className={styles.zipcode_search_button} onClick={handleToggleModal}>
-              우편번호 검색
+          <div className={styles.comment_submit_wrapper}>
+            <div className={styles.comment_textarea_count}>
+              {contents.length}/100
+            </div>
+            <button
+              className={styles.comment_submit_button}
+              onClick={onClickSubmit}
+            >
+              등록하기
             </button>
           </div>
-          <input
-            placeholder="주소를 입력해주세요."
-            className={styles.enroll_input}
-            type="text"
-            readOnly
-            value={address}
-          />
-          <input
-            placeholder="상세주소"
-            className={styles.enroll_input}
-            type="text"
-            defaultValue={addressDetail}
-            onChange={onChangeAddressDetail}
-          />
         </div>
-        <div className={styles.enroll_border}></div>
-        <div className={styles.enroll_row_section}>
-          <div className={styles.enroll_form_title}>
-            <div>유튜브 링크</div>
-          </div>
-          <input
-            className={styles.enroll_input}
-            placeholder="링크를 입력해 주세요."
-            value={youtubeUrl}
-            onChange={onChangeYoutubeUrl}
-          />
-        </div>
-
-        <div className={styles.enroll_border}></div>
-
-        <div className={styles.enroll_row_section}>
-          <div>사진 첨부</div>
-          <div className={styles.picture_enroll_row}>
-            <Image src={IMAGE_SRC.addImage.src} alt="이미지추가" />
-            <Image src={IMAGE_SRC.addImage.src} alt="이미지추가" />
-            <Image src={IMAGE_SRC.addImage.src} alt="이미지추가" />
-          </div>
-        </div>
-      </div>
-      <div className={styles.enroll_button_container}>
-        <button className={styles.enroll_cancel_button}>취소</button>
-        <button
-          className={
-            isActive
-              ? styles.enroll_submit_button
-              : `${styles.enroll_submit_button} ${styles.disabled}`
-          }
-          onClick={isEdit ? onClickUpdate : onClickSubmit}
-          disabled={!isActive}
-        >
-          {isEdit ? "수정" : "등록"}하기
-        </button>
       </div>
     </div>
   );
