@@ -56,33 +56,32 @@ export default function BoardWritePage(props: IBoardWriteProps) {
         </div>
         <div className={styles.enroll_row_container}>
           <div className={styles.flex_half}>
-              <div className={styles.enroll_form_title}>
-                <div>작성자</div>
-                <div className={styles.enroll_required_indicator}> *</div>
-              </div>
-              <input
-                readOnly={isEdit}
-                defaultValue={isEdit ? data?.fetchBoard?.writer : writer}
-                type="text"
-                placeholder="작성자 명을 입력해 주세요."
-                className={isEdit ? styles.disabled_input : styles.enroll_input}
-                onChange={onChangeWriter}
-              />
-              <div className={styles.error_msg}>{writerError}</div>
+            <div className={styles.enroll_form_title}>
+              <div>작성자</div>
+              <div className={styles.enroll_required_indicator}> *</div>
             </div>
-            <div className={styles.flex_half}>
-              <div className={styles.enroll_form_title}>
-                <div>비밀번호</div>
-                <div className={styles.enroll_required_indicator}> *</div>
-              </div>
-              <input
-                type="password"
-                placeholder="비밀번호를 입력해 주세요."
-                className={styles.enroll_input}
-                onChange={onChangePassword}
-              />
-              <div className={styles.error_msg}>{passwordError}</div>
+            <input
+              readOnly={isEdit}
+              defaultValue={isEdit ? data?.fetchBoard?.writer : writer}
+              type="text"
+              placeholder="작성자 명을 입력해 주세요."
+              className={isEdit ? styles.disabled_input : styles.enroll_input}
+              onChange={onChangeWriter}
+            />
+            <div className={styles.error_msg}>{writerError}</div>
+          </div>
+          <div className={styles.flex_half}>
+            <div className={styles.enroll_form_title}>
+              <div>비밀번호</div>
+              <div className={styles.enroll_required_indicator}> *</div>
             </div>
+            <input
+              type="password"
+              placeholder="비밀번호를 입력해 주세요."
+              className={styles.enroll_input}
+              onChange={onChangePassword}
+            />
+            <div className={styles.error_msg}>{passwordError}</div>
           </div>
 
           <div className={styles.enroll_border}></div>
