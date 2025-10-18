@@ -14,12 +14,12 @@ export default function Navigation() {
     <nav className={styles.wrapper}>
       <div className={styles.wrapperLeft}>
         <Image
-          src={logo} // 6. import한 이미지 변수 사용
+          src={logo}
           alt="logo"
-          width={52} // Image 태그는 width, height가 필수
-          height={32}
+          width={120}
+          height={40}
           className={styles.logo}
-          onClick={onClickMenu("/")} // 7. onClick으로 기능 연결
+          onClick={onClickMenu("/")}
         />
         <span className={styles.menuItem} onClick={onClickMenu("/boards")}>
           트립토크

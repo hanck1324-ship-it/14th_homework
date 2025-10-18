@@ -29,9 +29,10 @@
 }
 
 .logo {
-  width: 52px;
-  height: 32px;
+  width: 120px;
+  height: 40px;
   cursor: pointer;
+  object-fit: contain; /* 이미지 비율 유지 */
 }
 
 .menuItem {
