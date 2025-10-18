@@ -33,7 +33,7 @@ export default function Banner() {
               src={src}
               alt={`배너 이미지 ${index + 1}`}
               fill
-              style={{ objectFit: 'cover' }}
+              style={{ objectFit: 'contain' }}
               className={styles.bannerImage}
               priority={index === 0} // 첫 번째 이미지는 우선 로딩
             />
