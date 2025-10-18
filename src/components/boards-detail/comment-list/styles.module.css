@@ -12,7 +12,7 @@
   width: 100%;
   flex-direction: column;
   align-items: flex-start;
-  gap: 20px; /* 댓글 사이 간격 조정 */
+  gap: 20px; /* 댓글 사이 간격 조정  미관상 안좋음 */
 }
 
 .listBody {

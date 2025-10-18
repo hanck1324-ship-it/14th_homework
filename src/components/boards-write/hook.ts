@@ -28,12 +28,17 @@ export const useBoardWrite = (isEdit: boolean) => {
   const [zipcode, setZipcode] = useState("");
   const [address, setAddress] = useState("");
   const [addressDetail, setAddressDetail] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isPostcodeModalOpen, setIsPostcodeModalOpen] = useState(false);
   
   // GraphQL API 요청 함수 
   const [createBoard] = useMutation(CreateBoardDocument);
   const [updateBoard] = useMutation(UpdateBoardDocument);
   const { data } = useQuery(FetchBoardDocument, { variables: { boardId }, skip: !isEdit });
+
+  //모달을 추가//
+  const [isModalOpen, setIsModalOpen ] = useState(false); //모달을 보여줄지 말지 결정하는 스위치 역할을 하는 isModalOpen이라는 상태를 만든 것 //
+  const [modalContents, setIsModalContents ] = useState(""); // 모달에 어떤 메시지를 보여줄지 보관하는 modalContents라는 상태를 만든 것 //
+
 
   // 이벤트 핸들러 정리
   const onChangeWriter = (e: ChangeEvent<HTMLInputElement>) => setWriter(e.target.value);
@@ -51,12 +56,16 @@ export const useBoardWrite = (isEdit: boolean) => {
     setAddress(data.address);
     handleToggleModal();
   };
-
+  //알림 모달을 닫는 함수 추가 
+  const handleOk = () => {
+    setIsAlertModalOpen(false);
+  };
   
   // 이거 왜 빠졌지 게시글 등록 로직 완성
   const onClickSubmit = async () => {
     if (!writer || !password || !title || !contents) {
-      alert("작성자, 비밀번호, 제목, 내용은 필수 항목입니다.");
+      setModalContents("작성자, 비밀번호, 제목, 내용은 필수 항목입니다.");
+      setIsModalOpen(true);
       return;
     }
     try {
@@ -78,18 +87,21 @@ export const useBoardWrite = (isEdit: boolean) => {
       });
       const newBoardId = result.data?.createBoard?._id;
       if (newBoardId) {
-        alert("게시글이 성공적으로 등록되었습니다.");
+        setModalContents("게시글이 성공적으로 등록되었습니다.");
+        setIsModalOpen(true);
         router.push(`/boards/${newBoardId}`);
       }
     } catch (error: any) {
-      alert(`등록에 실패했습니다: ${error.message}`);
+      setModalContents(`등록에 실패했습니다: ${error.message}`);
+      setIsModalOpen(true);
     }
   };
 
   // 내 의도  게시글 수정 로직 개선 (변경된 내용만 보내기)
   const onClickUpdate = async () => {
     if (!password) {
-      alert("비밀번호를 입력해주세요.");
+      setModalContents("비밀번호를 입력해주세요.");
+      setIsModalOpen(true);
       return;
     }
 
@@ -109,7 +121,8 @@ export const useBoardWrite = (isEdit: boolean) => {
     }
 
     if (Object.keys(updateBoardInput).length === 0) {
-      alert("수정된 내용이 없습니다.");
+      setModalContents("수정된 내용이 없습니다.");
+      setIsAlertModalOpen(true);
       return;
     }
 
@@ -119,11 +132,13 @@ export const useBoardWrite = (isEdit: boolean) => {
       });
       const updatedBoardId = result.data?.updateBoard?._id;
       if (updatedBoardId) {
-        alert("게시글이 성공적으로 수정되었습니다.");
+        setModalContents("게시글이 성공적으로 수정되었습니다.");
+        setIsAlertModalOpen(true);
         router.push(`/boards/${updatedBoardId}`);
       }
     } catch (error: any) {
-      alert(`수정에 실패했습니다: ${error.message}`);
+      setModalContents(`수정에 실패했습니다: ${error.message}`);
+      setIsAlertModalOpen(true);
     }
   };
 
@@ -144,9 +159,13 @@ export const useBoardWrite = (isEdit: boolean) => {
   // --- UI 컴포넌트로 값과 함수들 전달 
   return {
     writer, password, title, contents, youtubeUrl, zipcode, address, addressDetail,
-    isModalOpen, data, isActive,
+    isPostcodeModalOpen, setIsAlertModalOpen, modalContents, 
+    data, isActive,
     onChangeWriter, onChangePassword, onChangeTitle, onChangeContents, onChangeYoutubeUrl,
-    onChangeAddressDetail, handleToggleModal, handleComplete,
+    onChangeAddressDetail,
+    handleTogglePostcodeModal, 
+    handleCompletePostcode,
+    handleOk,
     onClickSubmit, onClickUpdate,
   };
 };

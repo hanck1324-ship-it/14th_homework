@@ -1,0 +1,4 @@
+{
+  "/page": "app/page.js",
+  "/boards/[boardId]/page": "app/boards/[boardId]/page.js"
+}

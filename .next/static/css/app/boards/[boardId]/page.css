@@ -1,0 +1,303 @@
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[3]!./src/components/boards-detail/detail/styles.module.css ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************/
+.styles_detailLayout___c9c4 {
+  display: flex;
+  justify-content: center;
+  padding: 60px 0;
+}
+
+.styles_detailBody__amDg3 {
+  width: 1200px;
+  background-color: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  padding: 80px 100px;
+}
+
+.styles_detailFrame__KSOH7 {
+  width: 100%;
+}
+
+.styles_detailSubject__uPjLA {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.styles_detailMetadataContainer__BYw9N {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #bdbdbd;
+}
+
+.styles_detailMetadataProfile__WmomS {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.styles_detailMetadataDate__iylWQ {
+  color: #828282;
+  font-size: 16px;
+}
+
+.styles_detailMetadataIconContainer__KMa51 {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+  padding: 15px 0;
+}
+
+.styles_detailContentContainer__ZjTNA {
+  padding-top: 20px;
+}
+
+.styles_detailContentImage__ag4Xm {
+  width: 100%;
+  height: auto;
+  margin-bottom: 40px;
+}
+
+.styles_detailContentText__c783q {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+
+.styles_detailYoutubeWrapper__3K97V {
+  margin: 40px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.styles_detailContentGoodOrBad__iNXKT {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 120px 0;
+}
+
+.styles_detailGoodContainer__FUqb_ {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.styles_detailGoodText__yBZV6 {
+  color: #ffd600;
+  font-weight: 700;
+}
+
+.styles_detailBadText__82o33 {
+  color: #828282;
+  font-weight: 700;
+}
+
+.styles_detailButtonsContainer__c3llO {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  padding-top: 80px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.styles_detailButton__TywNa {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: white;
+  border: 1px solid #bdbdbd;
+  padding: 14px 60px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.styles_detailButton__TywNa:hover {
+  background-color: #f5f5f5;
+}
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[3]!./src/components/boards-detail/comment-list/styles.module.css ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************/
+
+.styles_commentListBody__TkWOw {
+  display: flex;
+  flex-direction: column;
+  width: 1280px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.styles_commentListContainer__y4DPC {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px; /* 댓글 사이 간격 조정  미관상 안좋음 */
+}
+
+.styles_listBody__ZSt9z {
+  display: flex;
+  flex-direction: row; /* 가로 정렬 */
+  align-items: flex-start; /* 상단 정렬 */
+  gap: 16px; /* 프로필과 내용 사이 간격 */
+  width: 100%;
+}
+
+.styles_listTitle__MZuck {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.styles_forwardTitle__77iaR {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.styles_forwardTitleText__vpebS {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.styles_backTitle__c9fB4 {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.styles_commentText__Z508v {
+  color: #333;
+  font-size: 16px;
+  padding-top: 4px;
+}
+
+.styles_commentDate__S8aAd {
+  color: #818181;
+  font-size: 14px;
+  padding-top: 12px;
+}
+
+.styles_border__T6Xx9 {
+  width: 100%;
+  height: 1px;
+  background: #e4e4e4;
+  margin-top: 20px;
+}
+
+.styles_profileImage__cQVAB {
+  border-radius: 50%;
+}
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[3]!./src/components/boards-detail/comment-write/styles.module.css ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************/
+/* src/components/boards-detail/comment-write/styles.module.css */
+.styles_commentBodyArea__gnpOE {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 1280px;
+    margin: 40px auto;
+    padding: 20px;
+  }
+  
+  .styles_title__2inYp {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 18px;
+    font-weight: 500;
+  }
+  
+  .styles_commentKeyArea__G0EPZ {
+    display: flex;
+    gap: 16px;
+    width: 640px;
+  }
+  
+  .styles_writerBox__QvTxT {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+  
+  .styles_inputTitle__kKkTL {
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  .styles_inputTitle__kKkTL span {
+    color: #ffd600;
+  }
+  
+  .styles_writerInput__aPxJS {
+    width: 100%;
+    height: 48px;
+    padding: 12px 16px;
+    border: 1px solid #d4d3d3;
+    border-radius: 8px;
+  }
+  
+  .styles_commentInputBody__KrM_f {
+    width: 100%;
+  }
+  
+  .styles_commentInput__BA6uz {
+    width: 100%;
+    height: 120px;
+    padding: 12px 16px;
+    border: 1px solid #d4d3d3;
+    border-radius: 8px;
+    resize: none;
+  }
+  
+  .styles_buttonBody__sOkgr {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #d4d3d3;
+    border-top: none;
+    padding-left: 16px;
+    height: 48px;
+    border-radius: 0 0 8px 8px;
+    margin-top: -8px;
+  }
+  
+  .styles_inputTextCount__K_5HC {
+    color: #999;
+  }
+  
+  .styles_commentEnrollButton____Ck0 {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 14px 16px;
+    cursor: pointer;
+    border-radius: 0 0 8px 0;
+  }
+  
+  .styles_commentEnrollButton____Ck0:disabled {
+    background-color: #e0e0e0;
+    cursor: not-allowed;
+  }
+/*!**************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[5].use[3]!./src/app/boards/[boardId]/styles.module.css ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************/
+.styles_wrapper__8h1bQ {
+    width: 1200px;
+    margin: 100px auto; 
+  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
